@@ -169,7 +169,7 @@ void MallaInd::crearVBOs()
    id_vbo_nor = CrearVBO(GL_ARRAY_BUFFER, GL_NORMAL_ARRAY, nor_ver.size(), nor_ver.data());
    id_vbo_cct = CrearVBO(GL_ARRAY_BUFFER, GL_TEXTURE_COORD_ARRAY, cc_tt_ver.size(), cc_tt_ver.data());
    id_vbo_ver = CrearVBO(GL_ARRAY_BUFFER, GL_VERTEX_ARRAY, vertices.size(), vertices.data());
-   id_vbo_tri = CrearVBO(GL_ELEMENT_ARRAY_BUFFER, 0, triangulos.size(), triangulos.data());
+   id_vbo_tri = CrearVBO(GL_ELEMENT_ARRAY_BUFFER, 0, 3*triangulos.size(), triangulos.data());
    
    CError();
 
@@ -207,7 +207,7 @@ void MallaInd::registrarTablas_MD()
    crearVBOs();
    
    RegistrarTabla(GL_ARRAY_BUFFER, GL_VERTEX_ARRAY, vertices.size(), id_vbo_ver, 0);
-   RegistrarTabla(GL_ELEMENT_ARRAY_BUFFER, 0, triangulos.size(), id_vbo_tri, 0);
+   RegistrarTabla(GL_ELEMENT_ARRAY_BUFFER, 0, 3*triangulos.size(), id_vbo_tri, 0);
    RegistrarTabla(GL_ARRAY_BUFFER, GL_COLOR_ARRAY, col_ver.size(), id_vbo_col, 0);
    RegistrarTabla(GL_ARRAY_BUFFER, GL_NORMAL_ARRAY, nor_ver.size(), id_vbo_nor, 0);
    RegistrarTabla(GL_ARRAY_BUFFER, GL_TEXTURE_COORD_ARRAY, cc_tt_ver.size(), id_vbo_cct, 0);
@@ -276,7 +276,7 @@ void MallaInd::visualizarGL_MI_VAO( ContextoVis & cv )
 
    crearActivarVAO_MI(); // aseguarse de que VAO para MI creado
 
-   glDrawElements(GL_TRIANGLES, triangulos.size(), GL_UNSIGNED_INT, triangulos.data());
+   glDrawElements(GL_TRIANGLES, 3*triangulos.size(), GL_UNSIGNED_INT, triangulos.data());
 
    glBindVertexArray(0); // dejar activado VAO por defecto
 
@@ -294,7 +294,7 @@ void MallaInd::visualizarGL_MD_VAO( ContextoVis & cv )
 
   crearActivarVAO_MD();
 
-  glDrawElements(GL_TRIANGLES, triangulos.size(), GL_UNSIGNED_INT, 0);
+  glDrawElements(GL_TRIANGLES, 3*triangulos.size(), GL_UNSIGNED_INT, 0);
 
   glBindVertexArray(0);
 }
@@ -310,14 +310,16 @@ void MallaInd::visualizarGL_MI_BE( ContextoVis & cv )
    // usar 'glBegin/glVertex/glEnd'
    // ..........
 
-  const unsigned long nv = vertices.size();
+  const unsigned long nv = triangulos.size();
 
   glBegin(GL_TRIANGLES);
-  for(unsigned long j=0; j<nv; j++){
-    if(col_ver.size()>0) glColor3fv(col_ver[j]);
-    if(nor_ver.size()>0) glNormal3fv(nor_tri[j]);
-    if(cc_tt_ver.size()>0) glTexCoord2fv(cc_tt_ver[j]);
-    glVertex3fv(vertices[j]);
+  for(unsigned long i=0; i<nv; i++){
+    for(unsigned long j=0; j < 3; j++){
+      if(col_ver.size()>0) glColor3fv(col_ver[triangulos[i][j]]);
+      if(nor_ver.size()>0) glNormal3fv(nor_tri[triangulos[i][j]]);
+      if(cc_tt_ver.size()>0) glTexCoord2fv(cc_tt_ver[triangulos[i][j]]);
+      glVertex3fv(vertices[triangulos[i][j]]);
+    }
   }
   glEnd();
 }
@@ -416,3 +418,62 @@ Cubo::Cubo()
 }
 // -----------------------------------------------------------------------------------------------
 
+// Clase Tetraedro
+
+Tetraedro::Tetraedro():Tetraedro({1.0, 1.0, 1.0}){};
+
+Tetraedro::Tetraedro(Tupla3f color) : MallaInd("Tetraedro de 4 vértices")
+{
+
+  vertices =
+    {  { 1.0, 0.0, 1.0 }, // 0
+       { 1.0, 0.0, -1.0 }, // 1
+       { -1.0, +1.0, 0.0 }, // 2
+       { -1.0, -1.0, 0.0 }, // 3
+    } ;
+
+  triangulos =
+    {  {0,1,2}, {0,1,3},
+       {0,2,3}, {1,2,3},
+    } ;
+
+  ponerColor(color);
+}
+
+
+// Clase Cubocolores
+
+CuboColores::CuboColores() : MallaInd("Cubo de colores")
+{
+  
+   vertices =
+      {  { -1.0, -1.0, -1.0 }, // 0
+         { -1.0, -1.0, +1.0 }, // 1
+         { -1.0, +1.0, -1.0 }, // 2
+         { -1.0, +1.0, +1.0 }, // 3
+         { +1.0, -1.0, -1.0 }, // 4
+         { +1.0, -1.0, +1.0 }, // 5
+         { +1.0, +1.0, -1.0 }, // 6
+         { +1.0, +1.0, +1.0 }, // 7
+      } ;
+
+
+
+   triangulos =
+      {  {0,1,3}, {0,3,2}, // X-
+         {4,7,5}, {4,6,7}, // X+ (+4)
+
+         {0,5,1}, {0,4,5}, // Y-
+         {2,3,7}, {2,7,6}, // Y+ (+2)
+
+         {0,6,4}, {0,2,6}, // Z-
+         {1,5,7}, {1,7,3}  // Z+ (+1)
+      } ;
+
+
+   col_ver= std::vector<Tupla3f>(8);
+
+   for(int i = 0; i < vertices.size(); i++)
+     for(int j = 0; j < 3; j++)
+       col_ver[i][j]=vertices[i][j]*0.5+0.5;
+}

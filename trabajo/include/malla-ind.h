@@ -101,7 +101,7 @@ class MallaInd : public Objeto3D
 class MallaPLY : public MallaInd
 {
    public:
-      MallaPLY( const std::string & nombre_arch ) ;
+  MallaPLY( const std::string & nombre_arch ) ;
 } ;
 
 
@@ -109,10 +109,21 @@ class MallaPLY : public MallaInd
 
 class Cubo : public MallaInd
 {
-   public:
-      Cubo();
+public:
+  Cubo();
 };
 
+class Tetraedro : public MallaInd
+{
+public:
+  Tetraedro();
+  Tetraedro(Tupla3f color);
+};
 
+class CuboColores : public MallaInd
+{
+public:
+  CuboColores();
+};
 
 #endif

@@ -163,6 +163,7 @@ Escena1::Escena1()
    using namespace std ;
    cout << "Creando objetos de escena 1 .... " << flush ;
 
+   //objetos.push_back(new CuboColor());
    // añadir el objeto 'Cubo' a la lista de objetos de esta escena:
    objetos.push_back( new Cubo() );
 
@@ -170,7 +171,12 @@ Escena1::Escena1()
    // Añadir objetos al vector 'objetos', con:
    //     objetos.push_back( new .... )
    // .........
-
+   
+   objetos.push_back(new Tetraedro({0.8,0.6,0.1}));
+   objetos.push_back(new Tetraedro());
+   objetos.push_back(new Tetraedro({0.1,0.6,1}));
+   objetos.push_back(new CuboColores());
+   
 
    cout << "hecho." << endl << flush ;
 }
