@@ -48,14 +48,14 @@ const std::string nombreModoVisu[ int(ModosVisu::num_modos)+1 ] =
 enum class ModosEnvio
 {
    inmediato_begin_end,
-   inmediato_vao,
+   inmediato_drawelements,
    diferido_vao,
    num_modos
 } ;
 const std::string nombreModoEnvio[ int(ModosEnvio::num_modos)+1 ] =
 {
    "inmediato (con 'glBegin/glEnd')",
-   "inmediato con VAO (con 'glDrawElements')",
+   "inmediato (con 'glDrawElements')",
    "diferido con VAO (con 'glDrawElements')",
    "*** NUM MODOS ENV. ***"
 } ;

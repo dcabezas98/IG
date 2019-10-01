@@ -216,28 +216,6 @@ void MallaInd::registrarTablas_MD()
 }
 
 
-
-// -----------------------------------------------------------------------------
-// crear (si no estaba creado) y activar el VAO para el MI
-
-void MallaInd::crearActivarVAO_MI()
-{
-   CError();
-   // COMPLETAR: práctica 1
-   // Crear (si no lo estaba) el VAO del M.I., y activarlo.
-   // .....
-
-   if(id_vao_mi == 0){ // si VAO no creado
-     glGenVertexArrays(1, &id_vao_mi); // crea VAO
-     glBindVertexArray(id_vao_mi); // activar VAO
-     registrarTablas_MI(); // registrar localización y formato tablas
-   }
-   else
-     glBindVertexArray(id_vao_mi); // activar VAO ya creado
-
-   CError();
-}
-
 // -----------------------------------------------------------------------------
 // crear los dos VAOS: 'id_vao_attr' e 'id_vao_geom' , solo si no estaban creados
 
@@ -263,7 +241,7 @@ void MallaInd::crearActivarVAO_MD( )
 
 // -----------------------------------------------------------------------------
 
-void MallaInd::visualizarGL_MI_VAO( ContextoVis & cv )
+void MallaInd::visualizarGL_MI_DE( ContextoVis & cv )
 {
    CError();
    using namespace std ;
@@ -274,11 +252,11 @@ void MallaInd::visualizarGL_MI_VAO( ContextoVis & cv )
    // al final, dejar activado el VAO por defecto
    // ....
 
-   crearActivarVAO_MI(); // aseguarse de que VAO para MI creado
+   glBindVertexArray(0);
+   registrarTablas_MI();
 
    glDrawElements(GL_TRIANGLES, 3*triangulos.size(), GL_UNSIGNED_INT, triangulos.data());
 
-   glBindVertexArray(0); // dejar activado VAO por defecto
 
    CError();
 
@@ -354,8 +332,8 @@ void MallaInd::visualizarGL( ContextoVis & cv )
    case ModosEnvio::inmediato_begin_end:
      visualizarGL_MI_BE(cv);
      break;
-   case ModosEnvio::inmediato_vao:
-     visualizarGL_MI_VAO(cv);
+   case ModosEnvio::inmediato_drawelements:
+     visualizarGL_MI_DE(cv);
      break;
    case ModosEnvio::diferido_vao:
      visualizarGL_MD_VAO(cv);

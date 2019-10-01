@@ -333,6 +333,10 @@ void ConfigurarGLFW()
    glfwWindowHint( GLFW_ACCUM_GREEN_BITS, 32 );
    glfwWindowHint( GLFW_ACCUM_BLUE_BITS, 32 );
    glfwWindowHint( GLFW_ACCUM_ALPHA_BITS, 32 );
+
+   // imprimir info. sobre la versión de GLFW en uso:
+   using namespace std ;
+   cout << "Versión de GLFW: " << glfwGetVersionString() << endl ;
 }
 
 // ----------------------------------------------------------------------------------
@@ -355,11 +359,16 @@ void TamPosVentanaGLFW( int & tamx, int & tamy, int & posx, int & posy )
 
 // ----------------------------------------------------------------------------
 // fijar el icono que se usa para la ventana GLFW, usando imagen UGR
-// en macOS no hace nada (no se puede)
+// * En macOS no hace nada (no se puede)
+// * Se evita intentarlo en Windows (aborta), y en versiones de GLFW
+//   previas a la 3.2 (no está definido 'glfwSetWindowIcon')
 
-#ifndef WINDOWS
 void FijarIconoVentanaGLFW( GLFWwindow * glfw_window )
 {
+   #ifndef WINDOWS
+   #if GLFW_VERSION_MAJOR >= 3
+   #if GLFW_VERSION_MINOR >= 2
+
    using namespace std ;
    assert( glfw_window != nullptr );
 
@@ -393,13 +402,12 @@ void FijarIconoVentanaGLFW( GLFWwindow * glfw_window )
 
    delete [] glfw_img.pixels ;
    delete [] img ;
+
+   #endif
+   #endif
+   #endif
 }
-#else
-void FijarIconoVentanaGLFW( GLFWwindow * glfw_window )
-{
-  // no hacer nada en windows ??
-}
-#endif
+
 // *****************************************************************************
 // funciones para dibujar los ejes, con conos, cilindros y esferas:
 
