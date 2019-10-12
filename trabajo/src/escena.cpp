@@ -163,7 +163,6 @@ Escena1::Escena1()
    using namespace std ;
    cout << "Creando objetos de escena 1 .... " << flush ;
 
-   //objetos.push_back(new CuboColor());
    // añadir el objeto 'Cubo' a la lista de objetos de esta escena:
    objetos.push_back( new Cubo() );
 
@@ -187,7 +186,22 @@ Escena1::Escena1()
 // los objetos que se indican en los guiones de las práctica 2
 // .......
 
+Escena2::Escena2()
+{
+   using namespace std ;
+   cout << "Creando objetos de escena 2 .... " << flush ;
 
+   objetos.push_back(new MallaPLY("../recursos/plys/beethoven"));
+   objetos.push_back(new MallaPLY("../recursos/plys/ant"));
+   objetos.push_back(new MallaPLY("../recursos/plys/big_dodge"));
+   objetos.push_back(new MallaRevolPLY("../recursos/plys/peon",20));
+   objetos.push_back(new MallaRevolPLY("../recursos/plys/lata-pcue",50));
+   objetos.push_back(new Cilindro(10,50));
+   objetos.push_back(new Cono(12,50));
+   objetos.push_back(new Esfera(20,50));
+   
+   cout << "hecho." << endl << flush ;
+}
 
 // -------------------------------------------------------------------------
 // COMPLETAR: Práctica 3

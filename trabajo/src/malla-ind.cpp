@@ -360,6 +360,8 @@ MallaPLY::MallaPLY( const std::string & nombre_arch )
    // llamar a 'calcularNormales' para el cálculo de normales
    // ..........................
 
+   LeerPLY(nombre_arch, vertices, triangulos);
+
 }
 
 // ****************************************************************************
@@ -380,8 +382,7 @@ Cubo::Cubo()
          { +1.0, +1.0, +1.0 }, // 7
       } ;
 
-
-
+   
    triangulos =
       {  {0,1,3}, {0,3,2}, // X-
          {4,7,5}, {4,6,7}, // X+ (+4)
@@ -434,7 +435,6 @@ CuboColores::CuboColores() : MallaInd("Cubo de colores")
          { +1.0, +1.0, -1.0 }, // 6
          { +1.0, +1.0, +1.0 }, // 7
       } ;
-
 
 
    triangulos =
