@@ -111,7 +111,6 @@ Esfera::Esfera(const int num_verts_per,
 
   for(int i = 0; i < num_verts_per; i++){
     float alpha = M_PI*((float)i/(num_verts_per-1)-(float)1/2);
-    cout << "ALPHA: " << alpha << endl;
     perfil.push_back({cos(alpha),sin(alpha),0});
   }
   

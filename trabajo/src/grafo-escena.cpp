@@ -83,11 +83,24 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
    // COMPLETAR: práctica 3: recorrer las entradas y visualizar cada nodo.
    // ........
 
+  cv.cauce_act->pushMM();
+
+  for(unsigned i = 0; i < entradas.size(); i++)
+    switch(entradas[i].tipo){
+    case TipoEntNGE::objeto:
+      entradas[i].objeto->visualizarGL(cv);
+      break;
+    case TipoEntNGE::transformacion:
+      cv.cauce_act->compMM(*(entradas[i].matriz));
+      break;
+    }
+
+  cv.cauce_act->popMM();
 }
 
 // *****************************************************************************
 // visualizar pura y simplemente la geometría, sin colores, normales, coord. text. etc...
-// ignora el colo o identificador del nodo, ignora las entradas de tipo material
+// ignora el color o identificador del nodo, ignora las entradas de tipo material
 // (se supone que el estado de OpenGL está fijado antes de esta llamada de alguna forma adecuada)
 
 
@@ -108,7 +121,10 @@ unsigned NodoGrafoEscena::agregar( const EntradaNGE & entrada )
 {
    // COMPLETAR: práctica 3: agregar la entrada al nodo, devolver índice de la entrada agregada
    // ........
-   return 0 ; // sustituir por lo que corresponda ....
+
+  entradas.push_back(entrada);
+
+  return entradas.size()-1;
 
 }
 // -----------------------------------------------------------------------------
@@ -139,10 +155,12 @@ Matriz4f * NodoGrafoEscena::leerPtrMatriz( unsigned indice )
 {
    // COMPLETAR: práctica 3: devolver puntero la matriz en ese índice
    //   (debe de dar error y abortar si no hay una matriz en esa entrada)
-   // ........(sustituir 'return nullptr' por lo que corresponda)
-   return nullptr ;
 
+  assert(indice<entradas.size());
+  assert(entradas[indice].tipo==TipoEntNGE::transformacion);
+  assert(entradas[indice].matriz!=nullptr);
 
+  return entradas[indice].matriz;
 }
 // -----------------------------------------------------------------------------
 // si 'centro_calculado' es 'false', recalcula el centro usando los centros
