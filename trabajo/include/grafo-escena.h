@@ -95,7 +95,6 @@ class NodoGrafoEscena : public Objeto3D
    // de los hijos (el punto medio de la caja englobante de los centros de hijos)
    virtual void calcularCentroOC() ;
 
-
 } ;
 
 #endif // GRAFO_ESCENA_HPP

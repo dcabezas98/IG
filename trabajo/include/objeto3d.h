@@ -25,8 +25,6 @@ class Objeto3D
       // visualizar el objeto con OpenGL, usando la configuración especificada en 'cv'
       virtual void visualizarGL( ContextoVis & cv ) = 0 ;
 
-
-
       // devuelve el nombre del objeto
       std::string leerNombre() ;
 

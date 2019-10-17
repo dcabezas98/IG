@@ -11,94 +11,163 @@ using namespace std;
 // C
 
 C::C(){
-  ponerNombre("C");
   
-  agregar(new PelotaInflable());
+  ponerNombre("C");
+
+  Esfera* esfera = new Esfera(50,50); // Para las pelotas inflables
+  esfera->ponerColor({1.0,0.0,0.0});
+
+  CilindroCerrado* cilindro = new CilindroCerrado(10,5); // Para las hélices
+  cilindro->ponerColor({0.8,0.8,0.2});
+
+  
+  agregar(new Soporte());
+
+  int i = agregar(MAT_Rotacion(0.0,0.0,1.0,0.0));
+  mat_rotacion = leerPtrMatriz(i);
+
+  Brazo* brazo1 = new Brazo();
+  
+  // brazo 1
+
+  agregar(MAT_Traslacion(2.1,0.0,0.0));
+  
+  brazo1->agregar(new Eje());
+  
+  PelotaInflable* pelota1 = new PelotaInflable();
+
+  // pelota 1
+
+  i = pelota1->agregar(MAT_Traslacion(7.5,0.0,0.0));
+  mat_traslacion_pelota1 = pelota1->leerPtrMatriz(i);
+  
+  i = pelota1->agregar(MAT_Escalado(1.5, 1.5, 1.5));
+  mat_escalado_pelota1 = pelota1->leerPtrMatriz(i);
+  
+  pelota1->agregar(esfera);
+  
+  // fin pelota 1
+
+  brazo1->agregar(pelota1);
+  
+  i = brazo1->agregar(MAT_Traslacion(2.95,0.0,0.0));
+  mat_traslacion_helice1 = brazo1->leerPtrMatriz(i);
+  
+  Helice* helice1 = new Helice();
+
+  // helice 1
+
+  i = helice1->agregar(MAT_Rotacion(0.0, 1.0, 0.0, 0.0));
+  mat_rotacion_helice1 = helice1->leerPtrMatriz(i);
+
+  helice1->agregar(MAT_Escalado(0.2,3.0,0.4));
+  helice1->agregar(MAT_Rotacion(45.0,0.0,1.0,0.0)); // Rotar 45º respecto eje Y
+  helice1->agregar(cilindro);
+
+  // fin helice 1
+
+  brazo1->agregar(helice1);
+  
+  // fin brazo 1
+
+  agregar(brazo1);
+  
+  agregar(MAT_Escalado(-1, 1, 1));
+
+  Brazo* brazo2 = new Brazo();
+  
+  // brazo 2
+
+  agregar(MAT_Traslacion(4.2,0.0,0.0));
+  
+  brazo2->agregar(new Eje());
+  
+  PelotaInflable* pelota2 = new PelotaInflable();
+
+  // pelota 2
+
+  i = pelota2->agregar(MAT_Traslacion(7.5,0.0,0.0));
+  mat_traslacion_pelota2 = pelota2->leerPtrMatriz(i);
+  
+  i = pelota2->agregar(MAT_Escalado(1.5, 1.5, 1.5));
+  mat_escalado_pelota2 = pelota2->leerPtrMatriz(i);
+  
+  i=pelota2->agregar(esfera);
+  
+  // fin pelota 2
+
+  brazo2->agregar(pelota2);
+  
+  i = brazo2->agregar(MAT_Traslacion(2.95,0.0,0.0));
+  mat_traslacion_helice2 = brazo2->leerPtrMatriz(i);
+  
+  Helice* helice2 = new Helice();
+
+  // helice 2
+
+  i = helice2->agregar(MAT_Rotacion(0.0, 1.0, 0.0, 0.0));
+  mat_rotacion_helice2 = helice2->leerPtrMatriz(i);
+
+  helice2->agregar(MAT_Escalado(0.2,3.0,0.4));
+  helice2->agregar(MAT_Rotacion(45.0,0.0,1.0,0.0)); // Rotar 45º respecto eje Y
+  i = helice2->agregar(cilindro); // Saldrá un prisma cuadrangular
+
+  // fin helice 1
+
+  brazo2->agregar(helice2);
+  
+  // fin brazo 1
+
+  agregar(brazo2);
+
 }
 
 unsigned C::leerNumParametros() const{
-    
-  int numParam = 0;
-
-  for(int i=0; i < entradas.size(); i++)
-    if(entradas[i].tipo==TipoEntNGE::objeto)
-      numParam+=entradas[i].objeto->leerNumParametros();
-
-  return numParam;
+  
+  return 7;
 }
 
 
 void C::actualizarEstadoParametro(const unsigned iParam, const float t_sec){
-  
-}
-
-
-// PelotaInflable
-
-PelotaInflable::PelotaInflable(){
-
-  ponerNombre("Pelota inflable");
-
-  int i = agregar(MAT_Traslacion(1.5+6.0,0.0,0.0));
-  mat_traslacion = leerPtrMatriz(i);
-  
-  i = agregar(MAT_Escalado(1.5, 1.5, 1.5)); // Matriz escalado
-  mat_escala = leerPtrMatriz(i);
-  
-  i=agregar(new Esfera(50,50));
-  entradas[i].objeto->ponerColor({1.0,0.0,0.0}); // Hacer la esfera roja
-}
-
-
-unsigned PelotaInflable::leerNumParametros() const{
-  return 1;
-}
-
-
-void PelotaInflable::actualizarEstadoParametro(const unsigned iParam, const float t_sec){
 
   assert(iParam<leerNumParametros());
+
+  float v;
   
   switch(iParam){
+    
   case 0:
-    float v=1.5+6.0+0.5*sin(M_PI*t_sec*0.5);
-    *mat_traslacion = MAT_Traslacion(v,0.0,0.0);
-    *mat_escala = MAT_Escalado(v-6.0,v-6.0,v-6.0);
+    *mat_rotacion = MAT_Rotacion(t_sec*90, 0.0, 1.0, 0.0);
     break;
-  }
-}
 
+  case 1:
+    v=7.5+0.5*sin(M_PI*t_sec*0.5);
+    *mat_traslacion_pelota1 = MAT_Traslacion(v,0.0,0.0);
+    *mat_escalado_pelota1 = MAT_Escalado(v-6.0,v-6.0,v-6.0);
+    break;
 
-// Helice
+  case 2:
+    v=7.5+0.5*sin(M_PI*t_sec*0.5);
+    *mat_traslacion_pelota2 = MAT_Traslacion(v,0.0,0.0);
+    *mat_escalado_pelota2 = MAT_Escalado(v-6.0,v-6.0,v-6.0);
+    break;
 
-Helice::Helice(){
+  case 3:
+    *mat_rotacion_helice1 = MAT_Rotacion(t_sec*360.0, 1.0, 0.0, 0.0);
+    break;
 
-  ponerNombre("Helice");
+  case 4:
+    *mat_rotacion_helice2 = MAT_Rotacion(t_sec*360.0, 1.0, 0.0, 0.0);
+    break;
 
-  int i = agregar(MAT_Rotacion(0.0, 1.0, 0.0, 0.0));
-  mat_rotacion = leerPtrMatriz(i);
+  case 5:
+    v = 2.95+2.95*sin(M_PI*0.25*t_sec); 
+    *mat_traslacion_helice1 = MAT_Traslacion(v, 0.0, 0.0);
+    break;
 
-  agregar(MAT_Escalado(0.2,3.0,0.4));
-  agregar(MAT_Rotacion(45.0,0.0,1.0,0.0)); // Rotar 45º respecto eje Y
-  i = agregar(new CilindroCerrado(10,5)); // Saldrá un prisma cuadrangular
-  entradas[i].objeto->ponerColor({0.8,0.8,0.2});
-}
-
-
-unsigned Helice::leerNumParametros() const{
-  return 1;
-}
-
-
-void Helice::actualizarEstadoParametro(const unsigned iParam, const float t_sec){
-
-  cout << "AQUI NO LLEGA " << endl;
-
-  assert(iParam<leerNumParametros());
-  
-  switch(iParam){
-  case 0:
-    *mat_rotacion = MAT_Rotacion(t_sec*180.0, 1.0, 0.0, 0.0);
+  case 6:
+    v = 2.95+2.95*sin(M_PI*0.25*t_sec); 
+    *mat_traslacion_helice2 = MAT_Traslacion(v, 0.0, 0.0);
     break;
   }
 }
@@ -135,60 +204,12 @@ Eje::Eje(){
   entradas[i].objeto->ponerColor({0.0,0.0,1.0});
 }
 
-// Brazo
 
-Brazo::Brazo(){
+// Soporte
 
-  ponerNombre("Brazo");
+Soporte::Soporte(){
 
-  agregar(new Eje()); 
-  agregar(new PelotaInflable());
-
-  int i = agregar(MAT_Traslacion(0.0,0.0,0.0));
-  mat_trasl_helice = leerPtrMatriz(i);
-  
-  agregar(new Helice());
-}
-
-
-unsigned Brazo::leerNumParametros() const{
-    
-  int numParam = 1;
-
-  for(int i=0; i < entradas.size(); i++)
-    if(entradas[i].tipo==TipoEntNGE::objeto)
-      numParam+=entradas[i].objeto->leerNumParametros();
-
-  return numParam;
-}
-
-
-void Brazo::actualizarEstadoParametro(const unsigned iParam, const float t_sec){
-
-  assert(iParam<leerNumParametros());
-
-  cout << "I: " << iParam << endl;
-  
-  switch(iParam){
-
-  case 0: // Rotacion de la helice
-    cout << "HOla 0" << endl;
-    entradas[0].objeto->actualizarEstadoParametro(0, t_sec);
-    cout << "adios 0 " << endl;
-    break;
-
-  case 1:{ // Traslacion de la helice
-    cout << "HOla 1" << endl;
-    float v = 5.9*sin(M_PI*0.25*t_sec); 
-    *mat_trasl_helice = MAT_Traslacion(v, 0.0, 0.0);
-    cout << "adios 1 " << endl;
-    break;
-  }
-    
-  case 2: // Agrandamiento de la pelota
-    cout << "HOla 2" << endl;
-    entradas[2].objeto->actualizarEstadoParametro(0, t_sec);
-    cout << "adios 2 " << endl;    
-    break;
-  }
+  agregar(MAT_Escalado(2.0,1.0,2.0));
+  int i = agregar(new CilindroCerrado(20,50));
+  entradas[i].objeto->ponerColor({0.8,0.6,0.4});
 }

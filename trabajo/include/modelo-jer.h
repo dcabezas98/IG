@@ -10,6 +10,32 @@
 
 class C : public NodoGrafoEscena
 {
+
+private:
+
+  // Param 0
+  Matriz4f* mat_rotacion;
+
+  // Param 1
+  Matriz4f* mat_escalado_pelota1;
+  Matriz4f* mat_traslacion_pelota1;
+
+  // Param 2
+  Matriz4f* mat_escalado_pelota2;
+  Matriz4f* mat_traslacion_pelota2;
+
+  // Param 3
+  Matriz4f* mat_rotacion_helice1;
+
+  // Param 4
+  Matriz4f* mat_rotacion_helice2;
+
+  // Param 5
+  Matriz4f* mat_traslacion_helice1;
+
+  // Param 6
+  Matriz4f* mat_traslacion_helice2;
+  
  public:
 
   C();
@@ -24,36 +50,14 @@ class C : public NodoGrafoEscena
 /* Esfera que se agranda y achica entre radio 1 y 2 */
 
 class PelotaInflable : public NodoGrafoEscena
-{
-private:
+{  
 
-  Matriz4f* mat_escala;
-  Matriz4f* mat_traslacion;
-  
-public:
-
-  PelotaInflable();
-
-  void actualizarEstadoParametro(const unsigned iParam, const float t_sec);
-
-  unsigned leerNumParametros() const;
-  
 };
 
 
 class Helice : public NodoGrafoEscena
 {
-private:
-
-  Matriz4f* mat_rotacion;
-
-public:
-
-  Helice();
-
-  void actualizarEstadoParametro(const unsigned iParam, const float t_sec);
-
-  unsigned leerNumParametros() const;  
+  
 };
 
 
@@ -68,28 +72,25 @@ public:
 
 class Brazo : public NodoGrafoEscena
 {
-private:
 
-  Matriz4f* mat_trasl_helice;
-
-  public:
-
-  Brazo();
-
-  void actualizarEstadoParametro(const unsigned iParam, const float t_sec);
-
-  unsigned leerNumParametros() const;
-  
 };
 
 
 class Eje : public NodoGrafoEscena{
 
 public:
-  
+
   Eje();
 };
 
 
-#endif // MOODELO_JER_HPP
+class Soporte: public NodoGrafoEscena{
+
+public:
+
+  Soporte();
+};
+
+
+#endif // MODELO_JER_HPP
   
