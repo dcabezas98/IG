@@ -14,7 +14,7 @@ C::C(){
   
   ponerNombre("C");
 
-  Esfera* esfera = new Esfera(50,50); // Para las pelotas inflables
+  Esfera* esfera = new Esfera(30,30); // Para las pelotas inflables
   esfera->ponerColor({1.0,0.0,0.0});
 
   CilindroCerrado* cilindro = new CilindroCerrado(10,5); // Para las hélices
@@ -25,7 +25,7 @@ C::C(){
 
   int i = agregar(MAT_Rotacion(0.0,0.0,1.0,0.0));
   mat_rotacion = leerPtrMatriz(i);
-
+  
   Brazo* brazo1 = new Brazo();
   
   // brazo 1
@@ -197,8 +197,9 @@ CilindroCerrado::CilindroCerrado(const int num_verts_per,
 
 Eje::Eje(){
 
+  agregar(MAT_Traslacion(3.0,0.0,0.0));
   agregar(MAT_Rotacion(90.0,0.0,0.0,1.0));
-  agregar(MAT_Escalado(0.2,12.0,0.2));
+  agregar(MAT_Escalado(0.2,6.0,0.2));
   
   int i = agregar(new CilindroCerrado(20,50));
   entradas[i].objeto->ponerColor({0.0,0.0,1.0});
