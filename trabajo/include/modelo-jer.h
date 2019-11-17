@@ -14,27 +14,50 @@ class C : public NodoGrafoEscena
 private:
 
   // Param 0
+  Matriz4f* mat_traslacion;
+ 
+  // Param 1
   Matriz4f* mat_rotacion;
 
-  // Param 1
+  // Param 2
   Matriz4f* mat_escalado_pelota1;
   Matriz4f* mat_traslacion_pelota1;
 
-  // Param 2
+  // Param 3
   Matriz4f* mat_escalado_pelota2;
   Matriz4f* mat_traslacion_pelota2;
 
-  // Param 3
-  Matriz4f* mat_rotacion_helice1;
-
   // Param 4
-  Matriz4f* mat_rotacion_helice2;
+  Matriz4f* mat_escalado_pelota3;
+  Matriz4f* mat_traslacion_pelota3;
 
   // Param 5
+  Matriz4f* mat_escalado_pelota4;
+  Matriz4f* mat_traslacion_pelota4;
+  
+  // Param 6
+  Matriz4f* mat_rotacion_helice1;
+
+  // Param 7
+  Matriz4f* mat_rotacion_helice2;
+
+  // Param 8
+  Matriz4f* mat_rotacion_helice3;
+
+  // Param 9
+  Matriz4f* mat_rotacion_helice4;
+
+  // Param 10
   Matriz4f* mat_traslacion_helice1;
 
-  // Param 6
+  // Param 11
   Matriz4f* mat_traslacion_helice2;
+
+  // Param 12
+  Matriz4f* mat_traslacion_helice3;
+
+  // Param 13
+  Matriz4f* mat_traslacion_helice4;
   
  public:
 
