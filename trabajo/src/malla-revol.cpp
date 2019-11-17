@@ -39,7 +39,7 @@ void MallaRevol::inicializar
 	float alpha = 2*M_PI*i/(num_copias-1);
 	float c = cos(alpha);
 	float s = sin(alpha);
-	vertices.push_back({perfil[j][X]*c-perfil[j][Z]*s, perfil[j][Y], perfil[j][X]*s+perfil[j][Z]*c});
+	vertices.push_back({perfil[j][X]*c, perfil[j][Y], perfil[j][X]*s});
       }
 
   // Inicializar tabla de triángulos
@@ -114,5 +114,53 @@ Esfera::Esfera(const int num_verts_per,
     perfil.push_back({cos(alpha),sin(alpha),0});
   }
   
+  inicializar(perfil, nperfiles);
+}
+
+
+// Pruebas
+
+Diabolo::Diabolo(const unsigned nperfiles)
+{
+  ponerNombre("Diabolo");
+
+  ponerColor({1,0.5,0.2});
+
+  std::vector<Tupla3f> perfil;
+
+  perfil.push_back({0,-1,0});
+  perfil.push_back({1,-1,0});
+  perfil.push_back({1,-0.8,0});
+  perfil.push_back({0.25,-0.1,0});
+  perfil.push_back({0.25,0.1,0});
+  perfil.push_back({1,0.8,0});
+  perfil.push_back({1,1,0});
+  perfil.push_back({0,1,0});
+  
+  inicializar(perfil, nperfiles);
+}
+
+
+Polea::Polea(const int num_verts_curva,
+	     const unsigned nperfiles){
+
+  ponerNombre("Polea");
+  ponerColor({0.4,0.4,0.4});
+
+  std::vector<Tupla3f> perfil;
+  
+  perfil.push_back({0,-1.5,0});
+  perfil.push_back({1.5,-1.5,0});
+
+
+  for(int i = 0; i < num_verts_curva; i++){
+    float alpha = M_PI*(float)i/(num_verts_curva-1);		
+    perfil.push_back({1.5-sin(alpha),-cos(alpha),0});
+  }
+
+
+  perfil.push_back({1.5,1.5,0});
+  perfil.push_back({0,1.5,0});
+
   inicializar(perfil, nperfiles);
 }

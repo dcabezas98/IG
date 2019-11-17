@@ -7,6 +7,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/malla-ind.cpp.o"
   "CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/malla-revol.cpp.o"
   "CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/materiales-luces.cpp.o"
+  "CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp.o"
   "CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/objeto3d.cpp.o"
   "CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/seleccion.cpp.o"
   "CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/recursos/src/cauce.cpp.o"

@@ -18,6 +18,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/dcabezas/Documents/git/IG/trabajo/src/malla-ind.cpp" "/home/dcabezas/Documents/git/IG/trabajo/cmake-unix/build/CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/malla-ind.cpp.o"
   "/home/dcabezas/Documents/git/IG/trabajo/src/malla-revol.cpp" "/home/dcabezas/Documents/git/IG/trabajo/cmake-unix/build/CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/malla-revol.cpp.o"
   "/home/dcabezas/Documents/git/IG/trabajo/src/materiales-luces.cpp" "/home/dcabezas/Documents/git/IG/trabajo/cmake-unix/build/CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/materiales-luces.cpp.o"
+  "/home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp" "/home/dcabezas/Documents/git/IG/trabajo/cmake-unix/build/CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp.o"
   "/home/dcabezas/Documents/git/IG/trabajo/src/objeto3d.cpp" "/home/dcabezas/Documents/git/IG/trabajo/cmake-unix/build/CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/objeto3d.cpp.o"
   "/home/dcabezas/Documents/git/IG/trabajo/src/seleccion.cpp" "/home/dcabezas/Documents/git/IG/trabajo/cmake-unix/build/CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/seleccion.cpp.o"
   )

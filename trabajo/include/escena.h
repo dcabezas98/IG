@@ -90,4 +90,14 @@ class Escena3 : public Escena
 } ;
 
 
+
+///// PRUEBAS
+
+class EscenaPrueba : public Escena
+{
+public:
+  EscenaPrueba();
+};
+
+
 #endif // ESCENA_H

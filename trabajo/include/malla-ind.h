@@ -123,4 +123,14 @@ public:
   CuboColores();
 };
 
+
+// Prueba
+
+class Diamante : public MallaInd
+{
+
+public:
+  Diamante();
+};
+
 #endif

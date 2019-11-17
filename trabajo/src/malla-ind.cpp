@@ -399,7 +399,7 @@ Cubo::Cubo()
 
 // Clase Tetraedro
 
-Tetraedro::Tetraedro():Tetraedro({1.0, 1.0, 1.0}){};
+Tetraedro::Tetraedro():Tetraedro({1.0, 1.0, 1.0}){}
 
 Tetraedro::Tetraedro(Tupla3f color) : MallaInd("Tetraedro de 4 vértices")
 {
@@ -454,4 +454,77 @@ CuboColores::CuboColores() : MallaInd("Cubo de colores")
    for(int i = 0; i < vertices.size(); i++)
      for(int j = 0; j < 3; j++)
        col_ver[i][j]=vertices[i][j]*0.5+0.5;
+}
+
+
+// Prueba
+
+Diamante::Diamante() : MallaInd("Diamante")
+{
+
+  //ponerColor({0.5, 0.9, 1});
+
+  vertices =
+    {
+     {0,0.5,0}, // 0
+     {1,0.5,0}, // 1 
+     {0.5,0.5,0.866}, // 2
+     {-0.5,0.5,0.866}, // 3
+     {-1,0.5,0}, // 4
+     {-0.5,0.5,-0.866}, // 5
+     {0.5,0.5,-0.866}, // 6
+
+     {1.5,0,0}, // 7
+     {0.75,0,1.299}, // 8
+     {-0.75,0,1.299}, // 9
+     {-1.5,0,0}, // 10
+     {-0.75,0,-1.299}, // 11
+     {0.75,0,-1.299}, // 12
+
+     {0,-2,0} // 13
+    };
+
+
+  col_ver= std::vector<Tupla3f>(13);
+
+  col_ver[0]={1,1,1};
+  for(int i = 1; i < vertices.size(); i++){
+
+    if (vertices[i][1] == 0.5) col_ver[i] = {0.5,0.9,1};
+  
+    else if (vertices[i][1] == 0) col_ver[i] = {0,0.4,0.8};
+  
+    else col_ver[i] = {0,0,0.9};
+  }  
+
+  triangulos =
+    {
+     {0,1,2},
+     {0,2,3},
+     {0,3,4},
+     {0,4,5},
+     {0,5,6},
+     {0,6,1},
+
+     {1,7,2},     
+     {2,8,3},     
+     {3,9,4},     
+     {4,10,5},     
+     {5,11,6},
+     {6,12,1},
+     
+     {7,8,2},
+     {8,9,3},
+     {9,10,4},
+     {10,11,5},
+     {11,12,6},
+     {12,7,1},
+
+     {7,8,13},
+     {8,9,13},
+     {9,10,13},
+     {10,11,13},
+     {11,12,13},
+     {12,7,13}
+    };
 }

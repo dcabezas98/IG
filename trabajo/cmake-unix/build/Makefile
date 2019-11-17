@@ -501,6 +501,33 @@ home/dcabezas/Documents/git/IG/trabajo/src/materiales-luces.cpp.s:
 	$(MAKE) -f CMakeFiles/pracs_ig_exe.dir/build.make CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/materiales-luces.cpp.s
 .PHONY : home/dcabezas/Documents/git/IG/trabajo/src/materiales-luces.cpp.s
 
+home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.o: home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp.o
+
+.PHONY : home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.o
+
+# target to build an object file
+home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp.o:
+	$(MAKE) -f CMakeFiles/pracs_ig_exe.dir/build.make CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp.o
+.PHONY : home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp.o
+
+home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.i: home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp.i
+
+.PHONY : home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.i
+
+# target to preprocess a source file
+home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp.i:
+	$(MAKE) -f CMakeFiles/pracs_ig_exe.dir/build.make CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp.i
+.PHONY : home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp.i
+
+home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.s: home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp.s
+
+.PHONY : home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.s
+
+# target to generate assembly for a file
+home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp.s:
+	$(MAKE) -f CMakeFiles/pracs_ig_exe.dir/build.make CMakeFiles/pracs_ig_exe.dir/home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp.s
+.PHONY : home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp.s
+
 home/dcabezas/Documents/git/IG/trabajo/src/objeto3d.o: home/dcabezas/Documents/git/IG/trabajo/src/objeto3d.cpp.o
 
 .PHONY : home/dcabezas/Documents/git/IG/trabajo/src/objeto3d.o
@@ -606,6 +633,9 @@ help:
 	@echo "... home/dcabezas/Documents/git/IG/trabajo/src/materiales-luces.o"
 	@echo "... home/dcabezas/Documents/git/IG/trabajo/src/materiales-luces.i"
 	@echo "... home/dcabezas/Documents/git/IG/trabajo/src/materiales-luces.s"
+	@echo "... home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.o"
+	@echo "... home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.i"
+	@echo "... home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.s"
 	@echo "... home/dcabezas/Documents/git/IG/trabajo/src/objeto3d.o"
 	@echo "... home/dcabezas/Documents/git/IG/trabajo/src/objeto3d.i"
 	@echo "... home/dcabezas/Documents/git/IG/trabajo/src/objeto3d.s"

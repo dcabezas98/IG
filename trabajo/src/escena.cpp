@@ -12,6 +12,8 @@
 #include "seleccion.h"
 #include "modelo-jer.h"
 
+#include "malla-barrido.h" // Prueba
+
 
 
 
@@ -173,8 +175,8 @@ Escena1::Escena1()
    // .........
    
    objetos.push_back(new Tetraedro({0.8,0.6,0.1}));
-   objetos.push_back(new Tetraedro());
-   objetos.push_back(new Tetraedro({0.1,0.6,1}));
+   //objetos.push_back(new Tetraedro());
+   //objetos.push_back(new Tetraedro({0.1,0.6,1}));
    objetos.push_back(new CuboColores());
    
 
@@ -193,10 +195,10 @@ Escena2::Escena2()
    cout << "Creando objetos de escena 2 .... " << flush ;
 
    objetos.push_back(new MallaPLY("../recursos/plys/beethoven"));
-   objetos.push_back(new MallaPLY("../recursos/plys/ant"));
-   objetos.push_back(new MallaPLY("../recursos/plys/big_dodge"));
+   // objetos.push_back(new MallaPLY("../recursos/plys/ant"));
+   //  objetos.push_back(new MallaPLY("../recursos/plys/big_dodge"));
    objetos.push_back(new MallaRevolPLY("../recursos/plys/peon",20));
-   objetos.push_back(new MallaRevolPLY("../recursos/plys/lata-pcue",50));
+   // objetos.push_back(new MallaRevolPLY("../recursos/plys/lata-pcue",50));
    objetos.push_back(new Cilindro(10,50));
    objetos.push_back(new Cono(12,50));
    objetos.push_back(new Esfera(20,50));
@@ -239,3 +241,18 @@ Escena3::Escena3()
 
 
 
+/////// PRUEBAS
+
+EscenaPrueba::EscenaPrueba()
+{
+   using namespace std ;
+   cout << "Creando objetos de escena de prueba .... " << flush ;
+
+   objetos.push_back(new Diamante());
+   objetos.push_back(new Diabolo(20));
+   objetos.push_back(new Polea(30,50));
+   objetos.push_back(new Tunel(15,-1,2,12));
+   objetos.push_back(new MallaBarridoPLY("../recursos/plys/peon",20,-3,1));
+   
+   cout << "hecho." << endl << flush ;
+}

@@ -24,7 +24,6 @@ class MallaRevol : public MallaInd
    protected: //
 
   MallaRevol() {} // solo usable desde clases derivadas con constructores especificos
-  MallaRevol( const std::string & nombreIni){}
 
    // Método que crea las tablas de vértices, triángulos, normales y cc.de.tt.
    // a partir de un perfil y el número de copias que queremos de dicho perfil.
@@ -69,6 +68,23 @@ public:
 
   Esfera(const int num_verts_per,
 	   const unsigned nperfiles);
+};
+
+
+// Pruebas
+
+class Diabolo : public MallaRevol
+{
+public:
+
+  Diabolo(const unsigned nperfiles);
+};
+
+class Polea : public MallaRevol
+{
+public:
+  Polea(const int num_verts_curva,
+	const unsigned nperfiles);
 };
 
 #endif

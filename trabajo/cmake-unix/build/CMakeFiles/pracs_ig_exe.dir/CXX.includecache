@@ -174,6 +174,16 @@ tuplasg.h
 lector-jpg.h
 ../../../trabajo/include/lector-jpg.h
 
+../../../trabajo/include/modelo-jer.h
+matrices-tr.h
+../../../trabajo/include/matrices-tr.h
+objeto3d.h
+../../../trabajo/include/objeto3d.h
+grafo-escena.h
+../../../trabajo/include/grafo-escena.h
+malla-revol.h
+../../../trabajo/include/malla-revol.h
+
 ../../../trabajo/include/objeto3d.h
 string
 -
@@ -301,6 +311,8 @@ materiales-luces.h
 /home/dcabezas/Documents/git/IG/trabajo/src/materiales-luces.h
 seleccion.h
 /home/dcabezas/Documents/git/IG/trabajo/src/seleccion.h
+modelo-jer.h
+/home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.h
 
 /home/dcabezas/Documents/git/IG/trabajo/src/grafo-escena.cpp
 ig-aux.h
@@ -343,12 +355,28 @@ matrices-tr.h
 /home/dcabezas/Documents/git/IG/trabajo/src/matrices-tr.h
 malla-revol.h
 /home/dcabezas/Documents/git/IG/trabajo/src/malla-revol.h
+math.h
+-
 
 /home/dcabezas/Documents/git/IG/trabajo/src/materiales-luces.cpp
 matrices-tr.h
 /home/dcabezas/Documents/git/IG/trabajo/src/matrices-tr.h
 materiales-luces.h
 /home/dcabezas/Documents/git/IG/trabajo/src/materiales-luces.h
+
+/home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.cpp
+math.h
+-
+ig-aux.h
+/home/dcabezas/Documents/git/IG/trabajo/src/ig-aux.h
+matrices-tr.h
+/home/dcabezas/Documents/git/IG/trabajo/src/matrices-tr.h
+grafo-escena.h
+/home/dcabezas/Documents/git/IG/trabajo/src/grafo-escena.h
+modelo-jer.h
+/home/dcabezas/Documents/git/IG/trabajo/src/modelo-jer.h
+malla-revol.h
+/home/dcabezas/Documents/git/IG/trabajo/src/malla-revol.h
 
 /home/dcabezas/Documents/git/IG/trabajo/src/objeto3d.cpp
 iostream
