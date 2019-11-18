@@ -13,7 +13,7 @@
 #include "modelo-jer.h"
 
 #include "malla-barrido.h" // Prueba
-
+#include "gusano.h"
 
 
 
@@ -98,6 +98,9 @@ void Escena::visualizarGL( ContextoVis & cv )
    // COMPLETAR: Práctica 1: visualizar el objeto actual ('objeto')
    objeto->visualizarGL(cv);
 
+
+   if(cv.caja)
+     objeto->visualizarGL_caja(cv); /////////////
 
 
    // si hay un FBO, dibujarlo:
@@ -193,7 +196,7 @@ Escena2::Escena2()
 {
    using namespace std ;
    cout << "Creando objetos de escena 2 .... " << flush ;
-
+   
    objetos.push_back(new MallaPLY("../recursos/plys/beethoven"));
    // objetos.push_back(new MallaPLY("../recursos/plys/ant"));
    //  objetos.push_back(new MallaPLY("../recursos/plys/big_dodge"));
@@ -240,6 +243,19 @@ Escena3::Escena3()
 // .......
 
 
+
+// Examen
+
+
+EscenaExamen::EscenaExamen()
+{
+  using namespace std ;
+   cout << "Creando objetos de escena de prueba .... " << flush ;
+
+   objetos.push_back(new Gusano(15));
+   
+   cout << "hecho." << endl << flush ;
+}
 
 /////// PRUEBAS
 

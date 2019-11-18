@@ -22,6 +22,12 @@ protected:
   // necesarios para una malla indexada
   // ......
 
+
+  ///////////////////////
+  std::vector<Tupla3f> vertices_caja;
+  GLuint id_vao_caja=0, id_vbo_ver_caja;
+  ///////////////////////
+  
   std::vector<Tupla3f> vertices ;
   std::vector<Tupla3i> triangulos ;
 
@@ -75,6 +81,10 @@ protected:
   void calcularNormalesTriangulos() ;
 
 
+  //////////////////////////////
+  void calcularVerticesCaja();
+  void visualizarGL_caja(ContextoVis & cv);
+  //////////////////////////////
 
 public:
   // crea una malla vacía (nombre: "malla indexada nueva vacía")
