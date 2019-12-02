@@ -24,6 +24,10 @@ public:
 
   // visualizar el objeto con OpenGL, usando la configuración especificada en 'cv'
   virtual void visualizarGL( ContextoVis & cv ) = 0 ;
+
+  //caja
+  virtual void visualizarGL_caja(ContextoVis & cv) = 0;
+  //caja 
   
   // devuelve el nombre del objeto
   std::string leerNombre() ;

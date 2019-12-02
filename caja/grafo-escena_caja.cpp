@@ -211,3 +211,34 @@ bool NodoGrafoEscena::buscarObjeto
    // ni este nodo ni ningún hijo es el buscado: terminar
    return false ;
 }
+
+
+
+//caja
+
+void NodoGrafoEscena::visualizarGL_caja( ContextoVis & cv )
+{
+   // COMPLETAR: práctica 3: recorrer las entradas y visualizar cada nodo.
+   // ........
+
+  const Tupla4f color_previo = leerFijarColVertsCauce( cv );
+
+  cv.cauce_act->pushMM();
+
+  for(unsigned i = 0; i < entradas.size(); i++)
+    switch(entradas[i].tipo){
+    case TipoEntNGE::objeto:
+      entradas[i].objeto->visualizarGL_caja(cv);
+      break;
+    case TipoEntNGE::transformacion:
+      cv.cauce_act->compMM(*(entradas[i].matriz));
+      break;
+    }
+
+  cv.cauce_act->popMM();
+
+
+  glColor4fv( color_previo );
+}
+//caja
+

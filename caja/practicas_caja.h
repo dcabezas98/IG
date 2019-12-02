@@ -103,6 +103,10 @@ class ContextoVis
    // numero de columnas (tam_x) y filas (tam_y) del viewport actual
    int ventana_tam_x = -1,
        ventana_tam_y = -1 ;
+
+  //caja
+  bool caja = false;
+  //caja
 };
 
 #endif // PRACTICAS_H

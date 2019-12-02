@@ -98,6 +98,10 @@ void Escena::visualizarGL( ContextoVis & cv )
    // COMPLETAR: Práctica 1: visualizar el objeto actual ('objeto')
    objeto->visualizarGL(cv);
 
+   //caja
+   if(cv.caja)
+     objeto->visualizarGL_caja(cv); //caja
+
 
    // si hay un FBO, dibujarlo:
 

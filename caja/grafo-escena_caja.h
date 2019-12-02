@@ -75,6 +75,10 @@ class NodoGrafoEscena : public Objeto3D
    // visualiza usando OpenGL
    virtual void visualizarGL( ContextoVis & cv ) ;
 
+  // caja
+  virtual void visualizarGL_caja(ContextoVis & cv);
+  // caja
+
    // añadir una entrada al final, hace copia de la entrada
    // devuelve indice de la entrada dentro del vector de entradas
    unsigned agregar( const EntradaNGE & entrada );

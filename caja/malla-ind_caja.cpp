@@ -528,3 +528,94 @@ Diamante::Diamante() : MallaInd("Diamante")
      {12,7,13}
     };
 }
+
+// caja
+void MallaInd::calcularVerticesCaja(){
+
+  float max_x, min_x, max_y, min_y, max_z, min_z;
+
+  max_x = min_x = vertices[0][X];
+  max_y = min_y = vertices[0][Y];
+  max_z = min_z = vertices[0][Z];
+
+  for (int i = 1; i < vertices.size(); i++){
+    if (vertices[i][X]>max_x) max_x=vertices[i][X];
+    if (vertices[i][X]<min_x) min_x=vertices[i][X];
+    if (vertices[i][Y]>max_y) max_y=vertices[i][Y];
+    if (vertices[i][Y]<min_y) min_y=vertices[i][Y];
+    if (vertices[i][Z]>max_z) max_z=vertices[i][Z];
+    if (vertices[i][Z]<min_z) min_z=vertices[i][Z];
+  }
+
+  std::vector<Tupla3f> v;
+  
+  v.push_back({min_x,min_y,min_z}); // 0
+  v.push_back({min_x,min_y,max_z}); // 1
+  v.push_back({min_x,max_y,min_z}); // 2
+  v.push_back({min_x,max_y,max_z}); // 3
+  v.push_back({max_x,min_y,min_z}); // 4
+  v.push_back({max_x,min_y,max_z}); // 5
+  v.push_back({max_x,max_y,min_z}); // 6
+  v.push_back({max_x,max_y,max_z}); // 7
+
+  vertices_caja.push_back(v[0]); // a
+  vertices_caja.push_back(v[1]);
+  vertices_caja.push_back(v[0]); // b
+  vertices_caja.push_back(v[2]);
+  vertices_caja.push_back(v[0]); // c
+  vertices_caja.push_back(v[4]);
+  vertices_caja.push_back(v[1]); // d
+  vertices_caja.push_back(v[3]);
+  vertices_caja.push_back(v[1]); // e
+  vertices_caja.push_back(v[5]);
+  vertices_caja.push_back(v[2]); // f
+  vertices_caja.push_back(v[3]);
+  vertices_caja.push_back(v[2]); // g
+  vertices_caja.push_back(v[6]);
+  vertices_caja.push_back(v[3]); // h
+  vertices_caja.push_back(v[7]);
+  vertices_caja.push_back(v[4]); // i
+  vertices_caja.push_back(v[5]);
+  vertices_caja.push_back(v[4]); // j
+  vertices_caja.push_back(v[6]);
+  vertices_caja.push_back(v[5]); // k
+  vertices_caja.push_back(v[7]);
+  vertices_caja.push_back(v[6]); // l
+  vertices_caja.push_back(v[7]);
+}
+
+void MallaInd::visualizarGL_caja(ContextoVis & cv){
+
+  calcularVerticesCaja();
+
+  glLineWidth(2);
+  
+  const Tupla4f color_previo = cv.cauce_act->leerColorActual();
+  glColor3f(1.0,0.5,0.5);
+  
+  // CrearActivar VAO
+  if(id_vao_caja == 0){ // si VAO no creado
+     glGenVertexArrays(1, &id_vao_caja); // crea VAO
+     glBindVertexArray(id_vao_caja);
+
+     // Crear VBOs
+     id_vbo_ver_caja=CrearVBO(GL_ARRAY_BUFFER, GL_VERTEX_ARRAY, vertices_caja.size(), vertices_caja.data());
+
+     // Registrar tabla
+     RegistrarTabla(GL_ARRAY_BUFFER, GL_VERTEX_ARRAY, vertices_caja.size(), id_vbo_ver_caja, 0);
+
+     
+   }
+   else
+     glBindVertexArray(id_vao_caja); // activar VAO ya creado
+
+  // VisualizarGL MD
+  glDrawArrays(GL_LINES, 0, vertices_caja.size());
+
+  glBindVertexArray(0);
+
+  glLineWidth(1);
+
+  glColor4fv( color_previo );
+}
+// caja

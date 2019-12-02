@@ -21,6 +21,15 @@ protected:
   // COMPLETAR: incluir aquí las variables y métodos privados que sean
   // necesarios para una malla indexada
   // ......
+
+
+  //caja
+  std::vector<Tupla3f> vertices_caja;
+  GLuint id_vao_caja=0, id_vbo_ver_caja;
+  
+  void calcularVerticesCaja();
+  void visualizarGL_caja(ContextoVis & cv);
+  //caja
   
   std::vector<Tupla3f> vertices ;
   std::vector<Tupla3i> triangulos ;
