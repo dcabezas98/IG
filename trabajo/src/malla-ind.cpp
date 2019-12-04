@@ -49,6 +49,19 @@ void MallaInd::calcularNormalesTriangulos()
    // COMPLETAR: Práctica 4: creación de la tabla de normales de triángulos
    // ....
 
+   Tupla3f a,b,m;
+   
+   for(int i = 0; i < triangulos.size(); i++){
+     a = vertices[triangulos[i][1]]-vertices[triangulos[i][0]];
+     b = vertices[triangulos[i][2]]-vertices[triangulos[i][0]];
+
+     m = a.cross(b);
+
+     if(m[X] != 0 or m[Y] != 0 or m[Z] != 0)
+       m = m.normalized();
+
+     nor_tri.push_back(m);
+   }
 }
 
 
@@ -61,7 +74,18 @@ void MallaInd::calcularNormales()
    // se debe invocar en primer lugar 'calcularNormalesTriangulos'
    // .......
 
+  calcularNormalesTriangulos();
 
+  for(int i = 0; i < vertices.size(); i++)
+    nor_ver.push_back({0.0,0.0,0.0});
+
+  for(int i = 0; i < triangulos.size(); i++)
+    for(int j = 0; j < 3; j++)
+      nor_ver[triangulos[i][j]] = nor_ver[triangulos[i][j]]+nor_tri[i];
+
+  for(int i = 0; i < nor_ver.size(); i++)
+    if(nor_ver[i][X]!= 0 or nor_ver[i][Y]!= 0 or nor_ver[i][Z]!= 0)
+      nor_ver[i]=nor_ver[i].normalized();
 }
 
 
@@ -294,7 +318,7 @@ void MallaInd::visualizarGL_MI_BE( ContextoVis & cv )
   for(unsigned long i=0; i<nv; i++){
     for(unsigned long j=0; j < 3; j++){
       if(col_ver.size()>0) glColor3fv(col_ver[triangulos[i][j]]);
-      if(nor_ver.size()>0) glNormal3fv(nor_tri[triangulos[i][j]]);
+      if(nor_ver.size()>0) glNormal3fv(nor_ver[triangulos[i][j]]);
       if(cc_tt_ver.size()>0) glTexCoord2fv(cc_tt_ver[triangulos[i][j]]);
       glVertex3fv(vertices[triangulos[i][j]]);
     }

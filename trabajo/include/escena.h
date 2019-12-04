@@ -89,13 +89,11 @@ class Escena3 : public Escena
       Escena3() ;
 } ;
 
-
-class EscenaExamen : public Escena
+class Escena4 : public Escena
 {
-public:
-  EscenaExamen();
-};
-
+   public:
+      Escena4() ;
+} ;
 
 ///// PRUEBAS
 

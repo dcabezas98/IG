@@ -39,11 +39,11 @@ class Textura  ;
 // posibles modos de generacion de coords. de textura
 
 typedef enum
-{  mgct_desactivada,
-   mgct_coords_objeto,
-   mgct_coords_ojo
-}
-   ModoGenCT ;
+  {  mgct_desactivada,
+     mgct_coords_objeto,
+     mgct_coords_ojo
+  }
+  ModoGenCT ;
 
 // *********************************************************************
 // Clase Textura:
@@ -54,36 +54,36 @@ typedef enum
 
 class Textura
 {
-   public:
+public:
 
-   // carga una imagen de textura en la memoria de vídeo, e
-   // inicializa los atributos de la textura a valores por defecto.
-   Textura( const std::string & nombreArchivoJPG ) ;
+  // carga una imagen de textura en la memoria de vídeo, e
+  // inicializa los atributos de la textura a valores por defecto.
+  Textura( const std::string & nombreArchivoJPG ) ;
 
-   // libera la memoria dinámica usada por la textura, si hay alguna
-   ~Textura() ;
+  // libera la memoria dinámica usada por la textura, si hay alguna
+  ~Textura() ;
 
-   // activar una textura en un cauce
-   void activar( Cauce & cauce ) ;
+  // activar una textura en un cauce
+  void activar( Cauce & cauce ) ;
 
-   protected: //--------------------------------------------------------
+protected: //--------------------------------------------------------
 
-   void enviar() ;    // envia la imagen a la GPU (gluBuild2DMipmaps)
+  void enviar() ;    // envia la imagen a la GPU (gluBuild2DMipmaps)
 
-   bool
-      enviada       = false ; // true si ha sido enviada, false en otro caso
-   GLuint
-      ident_textura = -1 ;// 'nombre' o identif. de textura para OpenGL
-   unsigned
-      ancho         = 0,  // número de columnas de la imagen
-      alto          = 0 ; // número de filas de la imagen
-   unsigned char *
-      imagen        = nullptr ; // pixels de la imagen, por filas.
-   ModoGenCT
-      modo_gen_ct   = mgct_desactivada ;  // modo de generacion de coordenadas de textura
-   float
-      coefs_s[4]    = {1.0,0.0,0.0,0.0},   // si 'modo_gen_ct != desactivadas', coeficientes para la coord. S
-      coefs_t[4]    = {0.0,1.0,0.0,0.0};   // idem para coordenada T
+  bool
+  enviada       = false ; // true si ha sido enviada, false en otro caso
+  GLuint
+  ident_textura = -1 ;// 'nombre' o identif. de textura para OpenGL
+  unsigned
+  ancho         = 0,  // número de columnas de la imagen
+    alto          = 0 ; // número de filas de la imagen
+  unsigned char *
+  imagen        = nullptr ; // pixels de la imagen, por filas.
+  ModoGenCT
+  modo_gen_ct   = mgct_desactivada ;  // modo de generacion de coordenadas de textura
+  float
+  coefs_s[4]    = {1.0,0.0,0.0,0.0},   // si 'modo_gen_ct != desactivadas', coeficientes para la coord. S
+    coefs_t[4]    = {0.0,1.0,0.0,0.0};   // idem para coordenada T
 } ;
 
 // *********************************************************************
@@ -93,11 +93,11 @@ class Textura
 
 class TexturaXY : public Textura
 {
-   public: TexturaXY( const std::string & nom );
+public: TexturaXY( const std::string & nom );
 } ;
 class TexturaXZ : public Textura
 {
-   public: TexturaXZ( const std::string & nom );
+public: TexturaXZ( const std::string & nom );
 } ;
 // *********************************************************************
 // Clase Material
@@ -107,46 +107,48 @@ class TexturaXZ : public Textura
 
 class Material
 {
-   public:
+public:
 
-   // material por defecto (ver valores iniciales en las declaraciones)
-   Material() {} ;
+  // material por defecto (ver valores iniciales en las declaraciones)
+  Material() {} ;
 
-   // crea un material usando el color plano del objeto
-   Material( /** const Tupla3f & p_color_ad,**/ const float p_k_amb, const float p_k_dif,
-             const float p_k_pse, const float p_exp_pse );
+  // crea un material usando el color plano del objeto
+  Material( /** const Tupla3f & p_color_ad,**/ const float p_k_amb, const float p_k_dif,
+	    const float p_k_pse, const float p_exp_pse );
 
-   // crea un material usando una textura
-   Material( Textura * p_textura, const float p_k_amb, const float p_k_dif,
-             const float p_k_pse, const float p_exp_pse );
+  // crea un material usando una textura
+  Material( Textura * p_textura, const float p_k_amb, const float p_k_dif,
+	    const float p_k_pse, const float p_exp_pse );
 
-   // libera la memoria dinámica ocupada por el material (básicamente la textura)
-   ~Material() ;
+  // libera la memoria dinámica ocupada por el material (básicamente la textura)
+  ~Material() ;
 
-   // activa un material (por ahora en el cauce fijo)
-   void activar( Cauce & cauce ) ;
+  // activa un material (por ahora en el cauce fijo)
+  void activar( Cauce & cauce ) ;
 
-   // poner y leer el nombre del material
-   void ponerNombre( const std::string & nuevo_nombre );
-   std::string nombre() const ;
+  // poner y leer el nombre del material
+  void ponerNombre( const std::string & nuevo_nombre );
+  std::string nombre() const ;
 
-   //--------------------------------------------------------
-   protected:
+  //--------------------------------------------------------
+protected:
 
-   //void coloresCero();// pone todos los colores y reflectividades a cero
+  //void coloresCero();// pone todos los colores y reflectividades a cero
 
-   std::string
-      nombre_mat = "material anónimo";  // nombre del material
+  std::string
+  nombre_mat = "material anónimo";  // nombre del material
 
-   //Tupla3f
-   //   color_ad = { 0.6f, 0.6f, 0.6f }; // color para componentes difusa y ambiental
-   Textura *
-      textura  = nullptr; // si != nullptr, se usa color de la textura en lugar de 'color_ad'
-   float
-      k_amb    = 0.2f,     // coeficiente de reflexión ambiente
-      k_dif    = 0.8f,     // coeficiente de reflexión difusa
-      k_pse    = 0.0f,     // coeficiente de reflexión pseudo-especular
-      exp_pse  = 0.0f ;    // exponente de brillo para reflexion pseudo-especular
+  //Tupla3f
+  //   color_ad = { 0.6f, 0.6f, 0.6f }; // color para componentes difusa y ambiental
+  Textura *
+  textura  = nullptr; // si != nullptr, se usa color de la textura en lugar de 'color_ad'
+
+  float
+  k_amb    = 0.2f,     // coeficiente de reflexión ambiente
+    k_dif    = 0.8f,     // coeficiente de reflexión difusa
+    k_pse    = 0.0f,     // coeficiente de reflexión pseudo-especular
+    exp_pse  = 0.0f ;    // exponente de brillo para reflexion pseudo-especular
+  
 } ;
 
 //**********************************************************************
@@ -156,46 +158,50 @@ class Material
 
 class FuenteLuz
 {
-   public:
+public:
 
-   // inicializa la fuente de luz
-   //
-   // p_longi_ini == valor inicial del ángulo horizontal en grados
-   // p_lati_ini  == idem del ángulo vértical
-   // p_color     == color de la fuente de luz (amb, dif y spec )
-   FuenteLuz( GLfloat p_longi_ini, GLfloat p_lati_ini, const Tupla3f & p_color ) ;
+  // inicializa la fuente de luz
+  //
+  // p_longi_ini == valor inicial del ángulo horizontal en grados
+  // p_lati_ini  == idem del ángulo vértical
+  // p_color     == color de la fuente de luz (amb, dif y spec )
+  FuenteLuz( GLfloat p_longi_ini, GLfloat p_lati_ini, const Tupla3f & p_color ) ;
 
-   // cambia los atributos de la instancia en respuesta a una pulsación
-   // de una tecla 'especial' (según la terminología de 'glut')
-   bool gestionarEventoTeclaEspecial( int key ) ;
+  // cambia los atributos de la instancia en respuesta a una pulsación
+  // de una tecla 'especial' (según la terminología de 'glut')
+  bool gestionarEventoTeclaEspecial( int key ) ;
 
-   // para fuentes diraccionales, incrementar o decrementar la longitud
-   // (en las puntuales no hace nada)
-   void actualizarLongi( const float incre );
-   // para fuentes diraccionales, incrementar o decrementar la longitud
-   // (en las puntuales no hace nada)
-   void actualizarLati( const float incre );
+  // para fuentes diraccionales, incrementar o decrementar la longitud
+  // (en las puntuales no hace nada)
+  void actualizarLongi( const float incre );
+  // para fuentes diraccionales, incrementar o decrementar la longitud
+  // (en las puntuales no hace nada)
+  void actualizarLati( const float incre );
 
-   //-------------------------------------------------------------------
-   // variables de instancia:
+  //-------------------------------------------------------------------
+  // variables de instancia:
 
-   public:
-    float
-      longi,      // longitud actual de la fuente direccional (en grados, entre 0 y 360)
-      lati ;      // latitud actual de la fuente direccional (en grados, entre -90 y 90)
+public:
+  float
+  longi,      // longitud actual de la fuente direccional (en grados, entre 0 y 360)
+    lati ;      // latitud actual de la fuente direccional (en grados, entre -90 y 90)
 
-   protected:
-   Tupla3f
-      col_ambiente,  // color de la fuente para la componente ambiental
-      col_difuso,    // color de la fuente para la componente difusa
-      col_especular; // color de la fuente para la componente especular
-   //GLenum
-   //   ind_fuente ;// indice de la fuente de luz en el vector, se asigna al insertarlo
-   float
-      longi_ini,  // valor inicial de 'longi'
-      lati_ini ;  // valor inicial de 'lati'
+protected:
+  Tupla3f color;
+  /*
+    Tupla3f
+    col_ambiente,  // color de la fuente para la componente ambiental
+    col_difuso,    // color de la fuente para la componente difusa
+    col_especular; // color de la fuente para la componente especular
+  */
+  
+  //GLenum
+  //   ind_fuente ;// indice de la fuente de luz en el vector, se asigna al insertarlo
+  float
+  longi_ini,  // valor inicial de 'longi'
+    lati_ini ;  // valor inicial de 'lati'
 
-   friend class ColFuentesLuz ;
+  friend class ColFuentesLuz ;
 } ;
 
 //**********************************************************************
@@ -205,30 +211,30 @@ class FuenteLuz
 
 class ColFuentesLuz
 {
-   public:
+public:
 
-   ColFuentesLuz() ; // crea la colección vacía
-   ~ColFuentesLuz() ;
+  ColFuentesLuz() ; // crea la colección vacía
+  ~ColFuentesLuz() ;
 
-   // inserta una nueva
-   void insertar( FuenteLuz * pf ) ;
+  // inserta una nueva
+  void insertar( FuenteLuz * pf ) ;
 
-   // activa esta colección de fuentes en el cauce
-   void activar( Cauce & cauce );
+  // activa esta colección de fuentes en el cauce
+  void activar( Cauce & cauce );
 
-   // pasa a la siguiente fuente de luz (si d==+1), o a la anterior (si d==-1)
-   // aborta si 'd' no es -1 o +1, inicialmente es la fuente 0
-   void sigAntFuente( int d ) ;
+  // pasa a la siguiente fuente de luz (si d==+1), o a la anterior (si d==-1)
+  // aborta si 'd' no es -1 o +1, inicialmente es la fuente 0
+  void sigAntFuente( int d ) ;
 
-   // devuelve un puntero a la fuente de luz actual
-   FuenteLuz * fuenteLuzActual() ;
+  // devuelve un puntero a la fuente de luz actual
+  FuenteLuz * fuenteLuzActual() ;
 
-   private:
+private:
 
-   std::vector<FuenteLuz *> vpf ; // vector de punteros a fuentes
+  std::vector<FuenteLuz *> vpf ; // vector de punteros a fuentes
 
-   GLint    max_num_fuentes = 0 ; // máximo número de fuentes
-   unsigned i_fuente_actual = 0 ; // fuente que se modifica al llamar a 'actualizar' (rota con pg.arriba y pg.abajo)
+  GLint    max_num_fuentes = 0 ; // máximo número de fuentes
+  unsigned i_fuente_actual = 0 ; // fuente que se modifica al llamar a 'actualizar' (rota con pg.arriba y pg.abajo)
 
 } ;
 
@@ -246,8 +252,8 @@ bool ProcesaTeclaFuenteLuz( ColFuentesLuz * col_fuentes, int glfw_key );
 
 class Col2Fuentes : public ColFuentesLuz
 {
-   public:
-      Col2Fuentes() ;
+public:
+  Col2Fuentes() ;
 } ;
 
 

@@ -11,8 +11,10 @@
 #include "materiales-luces.h"
 #include "seleccion.h"
 #include "modelo-jer.h"
+#include "latapeones.h"
 
-#include "malla-barrido.h" // Prueba
+// Prueba
+#include "malla-barrido.h"
 #include "gusano.h"
 
 
@@ -29,6 +31,9 @@ Escena::Escena()
    // (sustituir la cámara orbital simple ('CamaraOrbitalSimple') por varias cámaras de 3 modos ('Camara3Modos')
    camaras.push_back( new CamaraOrbitalSimple() );
 
+   col_fuentes = new Col2Fuentes();
+
+   material_ini = new Material();
 }
 // -----------------------------------------------------------------------------------------------
 // visualiza la escena en la ventana actual, usando la configuración especificada en 'cv'
@@ -85,7 +90,17 @@ void Escena::visualizarGL( ContextoVis & cv )
       // * comprobar que existe el material inicial (material_ini)
       // * activar la colección de fuentes y el material inicial
       // ....
+     
+     cauce->fijarEvalMIL( true );
+     cauce->fijarEvalText( false );
 
+     if(col_fuentes != nullptr)
+       col_fuentes->activar(*cauce);
+
+     if(material_ini != nullptr){
+       cv.material_act=material_ini;
+       cv.material_act->activar(*cauce);
+     }
    }
    else // si la iluminación no está activada, deshabilitar MIL y texturas
    {  cauce->fijarEvalMIL( false );
@@ -230,7 +245,16 @@ Escena3::Escena3()
 // los objetos que se indican en los guiones de las práctica 4
 // .......
 
+Escena4::Escena4()
+{
+   using namespace std ;
+   cout << "Creando objetos de escena 4 .... " << flush ;
 
+   objetos.push_back(new LataPeones());
+   
+   
+   cout << "hecho." << endl << flush ;
+}
 
 // ----------------------------------------------------------------------
 // COMPLETAR: Práctica 5

@@ -84,9 +84,13 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
    // ........
 
   const Tupla4f color_previo = leerFijarColVertsCauce( cv );
-
+  Material* material_previo;
+  
+  if(cv.iluminacion)
+    material_previo = cv.material_act;
+  
   cv.cauce_act->pushMM();
-
+    
   for(unsigned i = 0; i < entradas.size(); i++)
     switch(entradas[i].tipo){
     case TipoEntNGE::objeto:
@@ -95,9 +99,19 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
     case TipoEntNGE::transformacion:
       cv.cauce_act->compMM(*(entradas[i].matriz));
       break;
+    case TipoEntNGE::material:
+      cv.material_act=entradas[i].material;
+      cv.material_act->activar(*cv.cauce_act);
+      break;
     }
 
   cv.cauce_act->popMM();
+
+  if(cv.iluminacion){
+    cv.material_act = material_previo;
+    cv.material_act->activar(*cv.cauce_act);
+  }
+  
 
   glColor4fv( color_previo );
 }
