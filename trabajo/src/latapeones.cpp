@@ -116,9 +116,9 @@ Lata::Lata(){
   MallaRevol* pcue = new MallaRevolPLY("../recursos/plys/lata-pcue.ply",30);
 
   nodo_pcue->agregar(mat_pcue);
-  nodo_pcue->agregar(pcue);  
- 
-
+  nodo_pcue->agregar(pcue);
+  
+  
   agregar(nodo_psup);
   agregar(nodo_pinf);
   agregar(nodo_pcue);

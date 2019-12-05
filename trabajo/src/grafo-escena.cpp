@@ -20,6 +20,7 @@
 
 #include "ig-aux.h"
 #include "matrices-tr.h"
+#include "malla-ind.h"
 #include "grafo-escena.h"
 
 using namespace std ;
@@ -224,4 +225,17 @@ bool NodoGrafoEscena::buscarObjeto
 
    // ni este nodo ni ningún hijo es el buscado: terminar
    return false ;
+}
+
+
+NodoCubo24::NodoCubo24(){
+
+  Textura* text_ugr = new Textura("../recursos/imgs/window-icon.jpg");
+
+  Material* material = new Material(text_ugr,0.5,0.5,0.5,0.5);
+
+  ponerColor({0.8,0.8,0.8});
+  
+  agregar(material);
+  agregar(new Cubo24());
 }

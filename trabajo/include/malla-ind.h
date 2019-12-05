@@ -84,7 +84,7 @@ public:
   // visualizar el objeto con OpenGL
   virtual void visualizarGL( ContextoVis & cv ) ;
 
-
+  void visualizarNormales();
 
 
 } ;
@@ -119,6 +119,12 @@ class CuboColores : public MallaInd
 {
 public:
   CuboColores();
+};
+
+class Cubo24 : public MallaInd
+{
+public:
+  Cubo24();
 };
 
 

@@ -51,6 +51,8 @@ void Textura::enviar()
 
   glGenTextures(1, &ident_textura);
 
+  glBindTexture(GL_TEXTURE_2D, ident_textura);
+  
   gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, ancho, alto, GL_RGB, GL_UNSIGNED_BYTE, imagen);
 
   enviada = true;

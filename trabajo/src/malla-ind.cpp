@@ -343,6 +343,13 @@ void MallaInd::visualizarGL( ContextoVis & cv )
       return ;
    }
 
+
+   if(cv.visualizando_normales){
+     visualizarNormales();
+     return;
+   }
+   
+
    // guardar el color previamente fijado
    const Tupla4f color_previo = leerFijarColVertsCauce( cv );
 
@@ -369,8 +376,26 @@ void MallaInd::visualizarGL( ContextoVis & cv )
 }
 
 
+void MallaInd::visualizarNormales()
+{
+   using namespace std ;
+   CError();
+   if ( nor_ver.size() == 0 )
+   {
+      cout << "Advertencia: intentando dibujar normales de una malla que no tiene tabla (" << leerNombre() << ")." << endl ;
+      return ;
+   }
+   std::vector<Tupla3f> segmentos ;
+   for( unsigned i = 0 ; i < vertices.size() ; i++ )
+   {  segmentos.push_back( vertices[i] );
+      segmentos.push_back( vertices[i]+ 0.35f*(nor_ver[i]) );
+   }
+   CError();
+   glVertexPointer( 3, GL_FLOAT, 0, segmentos.data() );
+   glDrawArrays( GL_LINES,  0, segmentos.size() );
+   CError();
+}
 
-// *****************************************************************************
 
 
 // ****************************************************************************
@@ -385,7 +410,7 @@ MallaPLY::MallaPLY( const std::string & nombre_arch )
    // ..........................
 
    LeerPLY(nombre_arch, vertices, triangulos);
-
+   calcularNormales();
 }
 
 // ****************************************************************************
@@ -418,6 +443,7 @@ Cubo::Cubo()
          {1,5,7}, {1,7,3}  // Z+ (+1)
       } ;
 
+   calcularNormales();
 }
 // -----------------------------------------------------------------------------------------------
 
@@ -441,6 +467,8 @@ Tetraedro::Tetraedro(Tupla3f color) : MallaInd("Tetraedro de 4 vértices")
     } ;
 
   ponerColor(color);
+
+  calcularNormales();
 }
 
 
@@ -478,6 +506,84 @@ CuboColores::CuboColores() : MallaInd("Cubo de colores")
    for(int i = 0; i < vertices.size(); i++)
      for(int j = 0; j < 3; j++)
        col_ver[i][j]=vertices[i][j]*0.5+0.5;
+
+   calcularNormales();
+}
+
+
+// Clase Cubo24
+
+Cubo24::Cubo24() : MallaInd("Cubo de 24 vértices")
+{
+  vertices =
+      {  { -1.0, -1.0, -1.0 }, // 0
+         { -1.0, -1.0, +1.0 }, // 1
+         { -1.0, +1.0, -1.0 }, // 2
+         { -1.0, +1.0, +1.0 }, // 3
+         { +1.0, -1.0, -1.0 }, // 4
+         { +1.0, -1.0, +1.0 }, // 5
+         { +1.0, +1.0, -1.0 }, // 6
+         { +1.0, +1.0, +1.0 }, // 7
+
+	 { -1.0, -1.0, -1.0 }, // 0 +8
+         { -1.0, -1.0, +1.0 }, // 1 +8
+         { -1.0, +1.0, -1.0 }, // 2 +8
+         { -1.0, +1.0, +1.0 }, // 3 +8
+         { +1.0, -1.0, -1.0 }, // 4 +8
+         { +1.0, -1.0, +1.0 }, // 5 +8
+         { +1.0, +1.0, -1.0 }, // 6 +8
+         { +1.0, +1.0, +1.0 }, // 7 +8
+
+	 { -1.0, -1.0, -1.0 }, // 0 +16
+         { -1.0, -1.0, +1.0 }, // 1 +16
+         { -1.0, +1.0, -1.0 }, // 2 +16 
+         { -1.0, +1.0, +1.0 }, // 3 +16
+         { +1.0, -1.0, -1.0 }, // 4 +16
+         { +1.0, -1.0, +1.0 }, // 5 +16
+         { +1.0, +1.0, -1.0 }, // 6 +16
+         { +1.0, +1.0, +1.0 } // 7 +16
+      } ;
+
+
+   triangulos =
+      {  {0,1,3}, {0,3,2}, // X-
+         {4,7,5}, {4,6,7}, // X+ (+4)
+         {8,13,9}, {8,12,13}, // Y-
+         {10,11,15}, {10,15,14}, // Y+ (+2)
+         {16,22,20}, {16,18,22}, // Z-
+         {17,21,23}, {17,23,19}  // Z+ (+1)
+      } ;
+
+   cc_tt_ver=
+     {{0,1}, // 0
+      {1,1}, // 1
+      {0,0}, // 2
+      {1,0}, // 3
+      {0,1}, // 4
+      {1,1}, // 5
+      {0,0}, // 6
+      {1,0}, // 7
+
+      {0,1}, // 0 +8
+      {1,1}, // 1 +8
+      {0,0}, // 2 +8
+      {1,0}, // 3 +8
+      {0,0}, // 4 +8
+      {0,0}, // 5 +8
+      {0,0}, // 6 +8
+      {0,0}, // 7 +8
+
+      {1,1}, // 0 +16
+      {0,0}, // 1 +16
+      {1,0}, // 2 +16 
+      {0,0}, // 3 +16
+      {0,1}, // 4 +16
+      {0,0}, // 5 +16
+      {0,0}, // 6 +16
+      {0,0} // 7 +16
+     };
+
+   calcularNormales();
 }
 
 
@@ -551,4 +657,6 @@ Diamante::Diamante() : MallaInd("Diamante")
      {11,12,13},
      {12,7,13}
     };
+
+  calcularNormales();
 }

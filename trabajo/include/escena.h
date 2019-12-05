@@ -22,6 +22,8 @@ class Escena
    // visualiza el objeto actual de la escena
    void visualizarGL( ContextoVis & cv ) ;
 
+  void visualizarNormales( ContextoVis & cv ) ;
+
    // pasa la cámara actual a la siguiente
    void siguienteCamara() ;
 
