@@ -90,7 +90,7 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
   if(cv.iluminacion)
     material_previo = cv.material_act;
   
-  cv.cauce_act->pushMM();
+  cv.cauce_act->pushMM();  
     
   for(unsigned i = 0; i < entradas.size(); i++)
     switch(entradas[i].tipo){
@@ -101,8 +101,10 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
       cv.cauce_act->compMM(*(entradas[i].matriz));
       break;
     case TipoEntNGE::material:
-      cv.material_act=entradas[i].material;
-      cv.material_act->activar(*cv.cauce_act);
+      if(cv.iluminacion){
+	cv.material_act=entradas[i].material;
+	cv.material_act->activar(*cv.cauce_act);
+      }
       break;
     }
 
@@ -112,7 +114,6 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
     cv.material_act = material_previo;
     cv.material_act->activar(*cv.cauce_act);
   }
-  
 
   glColor4fv( color_previo );
 }

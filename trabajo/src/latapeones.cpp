@@ -44,6 +44,7 @@ LataPeones::LataPeones(){
   Material* mat_peon2 = new Material(0.5,0.5,0.5,0.5);
 
   MallaRevol* peon2 = new MallaRevolPLY("../recursos/plys/peon.ply",30);
+  peon2->ponerColor({0.6,0.6,0.6});
 
   
   nodo_peon2->agregar(mat_peon2);
@@ -62,7 +63,7 @@ LataPeones::LataPeones(){
   Material* mat_peon3 = new Material(0.5,0.5,0.5,0.5);
 
   MallaRevol* peon3 = new MallaRevolPLY("../recursos/plys/peon.ply",30);
-
+  peon3->ponerColor({0.1,0.1,0.1});
   
   nodo_peon3->agregar(mat_peon3);
   nodo_peon3->agregar(peon3);

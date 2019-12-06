@@ -5,6 +5,7 @@
 #include "grafo-escena.h"
 #include "modelo-jer.h"
 #include "malla-revol.h"
+#include "materiales-luces.h"
 
 using namespace std;
 
@@ -17,6 +18,11 @@ C::C(){
   Esfera* esfera = new Esfera(30,30); // Para las pelotas inflables
   esfera->ponerColor({1.0,0.0,0.0});
 
+  Textura* text_goma_roja = new Textura("imgs/red-rubber.jpg");
+  Material* mat_pelota = new Material(text_goma_roja,0.8,0.8,0.8,0.8); 
+
+  Material* mat_helice = new Material(0.8,0.8,0.8,0.8);
+  
   CilindroCerrado* cilindro = new CilindroCerrado(10,5); // Para las hélices
   cilindro->ponerColor({0.8,0.8,0.2});
 
@@ -45,7 +51,8 @@ C::C(){
   
   i = pelota1->agregar(MAT_Escalado(1.5, 1.5, 1.5));
   mat_escalado_pelota1 = pelota1->leerPtrMatriz(i);
-  
+
+  pelota1->agregar(mat_pelota);
   pelota1->agregar(esfera);
   
   // fin pelota 1
@@ -64,6 +71,8 @@ C::C(){
 
   helice1->agregar(MAT_Escalado(0.2,3.0,0.4));
   helice1->agregar(MAT_Rotacion(45.0,0.0,1.0,0.0)); // Rotar 45º respecto eje Y
+
+  helice1->agregar(mat_helice);
   helice1->agregar(cilindro);
 
   // fin helice 1
@@ -89,11 +98,13 @@ C::C(){
   
   i = pelota2->agregar(MAT_Escalado(1.5, 1.5, 1.5));
   mat_escalado_pelota2 = pelota2->leerPtrMatriz(i);
-  
-  i=pelota2->agregar(esfera);
+
+  pelota2->agregar(mat_pelota);
+  pelota2->agregar(esfera);
   
   // fin pelota 2
 
+  
   brazo2->agregar(pelota2);
   
   i = brazo2->agregar(MAT_Traslacion(3,0.0,0.0));
@@ -108,7 +119,9 @@ C::C(){
 
   helice2->agregar(MAT_Escalado(0.2,3.0,0.4));
   helice2->agregar(MAT_Rotacion(45.0,0.0,1.0,0.0)); // Rotar 45º respecto eje Y
-  i = helice2->agregar(cilindro); // Saldrá un prisma cuadrangular
+
+  helice2->agregar(mat_helice);
+  helice2->agregar(cilindro); // Saldrá un prisma cuadrangular
 
   // fin helice 2
 
@@ -133,8 +146,9 @@ C::C(){
   
   i = pelota3->agregar(MAT_Escalado(1.5, 1.5, 1.5));
   mat_escalado_pelota3 = pelota3->leerPtrMatriz(i);
-  
-  i=pelota3->agregar(esfera);
+
+  pelota3->agregar(mat_pelota);
+  pelota3->agregar(esfera);
   
   // fin pelota 3
 
@@ -152,7 +166,9 @@ C::C(){
 
   helice3->agregar(MAT_Escalado(0.2,3.0,0.4));
   helice3->agregar(MAT_Rotacion(45.0,0.0,1.0,0.0)); // Rotar 45º respecto eje Y
-  i = helice3->agregar(cilindro); // Saldrá un prisma cuadrangular
+
+  helice3->agregar(mat_helice);
+  helice3->agregar(cilindro); // Saldrá un prisma cuadrangular
 
   // fin helice 3
 
@@ -177,7 +193,8 @@ C::C(){
   
   i = pelota4->agregar(MAT_Escalado(1.5, 1.5, 1.5));
   mat_escalado_pelota4 = pelota4->leerPtrMatriz(i);
-  
+
+  pelota4->agregar(mat_pelota);
   pelota4->agregar(esfera);
   
   // fin pelota 4
@@ -196,6 +213,8 @@ C::C(){
 
   helice4->agregar(MAT_Escalado(0.2,3.0,0.4));
   helice4->agregar(MAT_Rotacion(45.0,0.0,1.0,0.0)); // Rotar 45º respecto eje Y
+
+  helice4->agregar(mat_helice);
   helice4->agregar(cilindro);
 
   // fin helice 4
@@ -329,8 +348,11 @@ Eje::Eje(){
   agregar(MAT_Traslacion(3.0,0.0,0.0));
   agregar(MAT_Rotacion(90.0,0.0,0.0,1.0));
   agregar(MAT_Escalado(0.2,6.0,0.2));
+
+  Material* mat_eje = new Material(0.8,0.8,0.8,0.8);
   
-  int i = agregar(new CilindroCerrado(20,50));
+  agregar(mat_eje);
+  int i = agregar(new CilindroCerrado(10,20));
   entradas[i].objeto->ponerColor({0.0,0.0,1.0});
 }
 
@@ -340,6 +362,11 @@ Eje::Eje(){
 Soporte::Soporte(){
 
   agregar(MAT_Escalado(2.0,1.0,2.0));
-  int i = agregar(new CilindroCerrado(20,50));
+
+  Textura* text_madera = new Textura("../recursos/imgs/text-madera.jpg");
+  Material* mat_soporte = new Material(text_madera,0.6,0.6,0.6,0.6);
+  
+  agregar(mat_soporte);
+  int i = agregar(new CilindroCerrado(5,50));
   entradas[i].objeto->ponerColor({0.8,0.6,0.4});
 }
