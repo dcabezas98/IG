@@ -24,7 +24,7 @@ LataPeones::LataPeones(){
 
   Textura* text_peon1 = new Textura("../recursos/imgs/text-madera.jpg");
   
-  Material* mat_peon1 = new Material(text_peon1,0.5,0.5,0.5,0.5);
+  Material* mat_peon1 = new Material(text_peon1,0.3,0.6,1.0,30.0);
 
   MallaRevol* peon1 = new MallaRevolPLY("../recursos/plys/peon.ply",30);
 
@@ -41,10 +41,10 @@ LataPeones::LataPeones(){
 
   NodoGrafoEscena* nodo_peon2 = new NodoGrafoEscena();
   
-  Material* mat_peon2 = new Material(0.5,0.5,0.5,0.5);
+  Material* mat_peon2 = new Material(0.2,0.9,0.1,1.0);
 
   MallaRevol* peon2 = new MallaRevolPLY("../recursos/plys/peon.ply",30);
-  peon2->ponerColor({0.6,0.6,0.6});
+  peon2->ponerColor({0.75,0.75,0.75});
 
   
   nodo_peon2->agregar(mat_peon2);
@@ -60,10 +60,10 @@ LataPeones::LataPeones(){
 
   NodoGrafoEscena* nodo_peon3 = new NodoGrafoEscena();
   
-  Material* mat_peon3 = new Material(0.5,0.5,0.5,0.5);
+  Material* mat_peon3 = new Material(0.4,0.2,0.8,5.0);
 
   MallaRevol* peon3 = new MallaRevolPLY("../recursos/plys/peon.ply",30);
-  peon3->ponerColor({0.1,0.1,0.1});
+  peon3->ponerColor({0.05,0.05,0.05});
   
   nodo_peon3->agregar(mat_peon3);
   nodo_peon3->agregar(peon3);
@@ -82,11 +82,11 @@ Lata::Lata(){
   
   NodoGrafoEscena* nodo_psup = new NodoGrafoEscena();
 
-  Material* mat_psup = new Material(0.2,0.8,0.8,0.5);
+  Material* mat_psup = new Material(0.4,0.4,0.9,20.0);
 
   MallaRevol* psup = new MallaRevolPLY("../recursos/plys/lata-psup.ply",30);
 
-  psup->ponerColor({0.4,0.4,0.4});
+  psup->ponerColor({0.5,0.5,0.5});
 
   nodo_psup->agregar(mat_psup);
   nodo_psup->agregar(psup);
@@ -96,11 +96,11 @@ Lata::Lata(){
   
   NodoGrafoEscena* nodo_pinf = new NodoGrafoEscena();
 
-  Material* mat_pinf = new Material(0.2,0.8,0.8,0.5);
+  Material* mat_pinf = new Material(0.4,0.4,0.9,20.0);
 
   MallaRevol* pinf = new MallaRevolPLY("../recursos/plys/lata-pinf.ply",30);
 
-  pinf->ponerColor({0.4,0.4,0.4});
+  pinf->ponerColor({0.5,0.5,0.5});
   
   nodo_pinf->agregar(mat_pinf);
   nodo_pinf->agregar(pinf);
@@ -112,7 +112,7 @@ Lata::Lata(){
 
   Textura* text_pcue = new Textura("../recursos/imgs/lata-coke.jpg");
     
-  Material* mat_pcue = new Material(text_pcue,0.2,0.8,0.8,0.5);
+  Material* mat_pcue = new Material(text_pcue,0.5,0.4,1.0,40.0);
 
   MallaRevol* pcue = new MallaRevolPLY("../recursos/plys/lata-pcue.ply",30);
 

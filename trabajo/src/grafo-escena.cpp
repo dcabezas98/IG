@@ -231,9 +231,11 @@ bool NodoGrafoEscena::buscarObjeto
 
 NodoCubo24::NodoCubo24(){
 
+  ponerNombre("Cubo UGR");
+  
   Textura* text_ugr = new Textura("../recursos/imgs/window-icon.jpg");
 
-  Material* material = new Material(text_ugr,0.5,0.5,0.5,0.5);
+  Material* material = new Material(text_ugr,0.5,0.3,0.7,20.0);
 
   ponerColor({0.8,0.8,0.8});
   

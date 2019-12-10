@@ -42,8 +42,12 @@ void MallaRevol::inicializar
   
   vector<Tupla3f> nor_ver_perfil;
 
+  if(nor_arist.front()[X]!=0 or nor_arist.front()[Y]!=0 or nor_arist.front()[Z]!=0)
+    nor_arist.front() = nor_arist.front().normalized();
+  
   nor_ver_perfil.push_back(nor_arist.front());
-
+  
+  
   for(int j = 1; j < m-1; j++){
     aux = nor_arist[j-1]+nor_arist[j];
 
@@ -52,6 +56,9 @@ void MallaRevol::inicializar
     
     nor_ver_perfil.push_back(aux);
   }
+
+  if(nor_arist.back()[X]!=0 or nor_arist.back()[Y]!=0 or nor_arist.back()[Z]!=0)
+    nor_arist.back() = nor_arist.back().normalized();
   
   nor_ver_perfil.push_back(nor_arist.back());
 
@@ -88,7 +95,7 @@ void MallaRevol::inicializar
 	// Añadir su normal
 	nor_ver.push_back({nor_ver_perfil[j][X]*c,nor_ver_perfil[j][Y], nor_ver_perfil[j][X]*s});
 	// Añadir sus coordenadas de textura
-	cc_tt_ver.push_back({(float)i/(num_copias-1), 1-t[j]});
+	cc_tt_ver.push_back({1.0-(float)i/(num_copias-1), 1-t[j]});
       }
 
   // Inicializar tabla de triángulos
@@ -96,8 +103,8 @@ void MallaRevol::inicializar
     for(int j = 0; j < m-1; j++)
       {
 	int k = i*m+j;
-	triangulos.push_back({k, k+m, k+m+1});
-	triangulos.push_back({k, k+m+1, k+1});
+	triangulos.push_back({k+m, k, k+m+1});
+	triangulos.push_back({k+m+1, k, k+1});
       }
 }
 

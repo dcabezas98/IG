@@ -79,6 +79,8 @@ void Textura::activar( Cauce & cauce  )
    // COMPLETAR: práctica 4: enviar la textura a la GPU (solo la primera vez) y activarla
    // .......
 
+  glColor3f(1.0,1.0,1.0);
+  
   if(!enviada)
     enviar();
   
@@ -141,7 +143,7 @@ void Material::activar( Cauce & cauce )
   if(textura != nullptr)
     textura->activar(cauce);
   else
-    cauce.fijarEvalText(false, -1);
+    cauce.fijarEvalText(false);
 
   cauce.fijarParamsMIL({k_amb,k_amb,k_amb}, {k_dif,k_dif,k_dif},
 		 {k_pse,k_pse,k_pse}, exp_pse);
@@ -213,7 +215,7 @@ bool FuenteLuz::gestionarEventoTeclaEspecial( int key )
 void FuenteLuz::actualizarLongi( const float incre )
 {
    longi = longi + incre ;
-   //std::cout << "incrementada longitud de una fuente de luz, nueva == " << longi << endl ;
+   // std::cout << "incrementada longitud de una fuente de luz, nueva == " << longi << endl ;
 }
 //----------------------------------------------------------------------
 // para fuentes diraccionales, incrementar o decrementar la longitud
@@ -221,6 +223,7 @@ void FuenteLuz::actualizarLongi( const float incre )
 void FuenteLuz::actualizarLati( const float incre )
 {
    lati = lati + incre ;
+   // std::cout << "incrementada latitud de una fuente de luz, nueva == " << lati << endl ;
 }
 
 //**********************************************************************
@@ -255,7 +258,7 @@ void ColFuentesLuz::activar( Cauce & cauce )
   for(int i = 0; i < vpf.size(); i++){
     colores.push_back(vpf[i]->color);
 
-    pd={cos(vpf[i]->longi),sin(vpf[i]->lati),sin(vpf[i]->longi),0.0};
+    pd={cos(vpf[i]->longi*M_PI/180.0),sin(vpf[i]->lati*M_PI/180.0),sin(vpf[i]->longi*M_PI/180.0),0.0};
     pos_dir.push_back(pd.normalized());
   }
   

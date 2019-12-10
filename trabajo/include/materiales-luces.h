@@ -144,10 +144,10 @@ protected:
   textura  = nullptr; // si != nullptr, se usa color de la textura en lugar de 'color_ad'
 
   float
-  k_amb    = 0.2f,     // coeficiente de reflexión ambiente
-    k_dif    = 0.8f,     // coeficiente de reflexión difusa
-    k_pse    = 0.0f,     // coeficiente de reflexión pseudo-especular
-    exp_pse  = 0.0f ;    // exponente de brillo para reflexion pseudo-especular
+  k_amb    = 0.6f,     // coeficiente de reflexión ambiente
+    k_dif    = 0.4f,     // coeficiente de reflexión difusa
+    k_pse    = 0.5f,     // coeficiente de reflexión pseudo-especular
+    exp_pse  = 5.0f ;    // exponente de brillo para reflexion pseudo-especular
   
 } ;
 

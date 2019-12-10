@@ -66,14 +66,14 @@ void InicializaOpenGLCuadro()
   glClearColor( 0.2, 0.25, 0.3, 1.0 );
 
   // dibujar en modo 'suave' (antialiasing de lineas y puntos)
-  glEnable( GL_POINT_SMOOTH );
-  glEnable( GL_LINE_SMOOTH );
-  glEnable( GL_POLYGON_SMOOTH );
+  // glEnable( GL_POINT_SMOOTH );
+  // glEnable( GL_LINE_SMOOTH );
+  // glEnable( GL_POLYGON_SMOOTH );
 
   // habilitar 'blending' (tiene en cuenta transparencia, componente alpha del color)
-  glEnable( GL_BLEND );
-  glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-  CError();
+  // glEnable( GL_BLEND );
+  // glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+  // CError();
 
   // para dibujar los polígonos rellenos más atrás que las aristas
   glEnable( GL_POLYGON_OFFSET_FILL );

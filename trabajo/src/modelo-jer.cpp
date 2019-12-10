@@ -19,9 +19,9 @@ C::C(){
   esfera->ponerColor({1.0,0.0,0.0});
 
   Textura* text_goma_roja = new Textura("imgs/red-rubber.jpg");
-  Material* mat_pelota = new Material(text_goma_roja,0.8,0.8,0.8,0.8); 
+  Material* mat_pelota = new Material(text_goma_roja,0.4,0.9,0.1,1.0); 
 
-  Material* mat_helice = new Material(0.8,0.8,0.8,0.8);
+  Material* mat_helice = new Material(0.6,0.2,0.8,25.0);
   
   CilindroCerrado* cilindro = new CilindroCerrado(10,5); // Para las hélices
   cilindro->ponerColor({0.8,0.8,0.2});
@@ -331,10 +331,14 @@ CilindroCerrado::CilindroCerrado(const int num_verts_per,
   std::vector<Tupla3f> perfil;
   
   perfil.push_back({0.0,-0.5,0.0});
-
+  
+  perfil.push_back({1.0,-0.5,0.0});
+  
   for(int i = 0; i < num_verts_per; i++)
     perfil.push_back({1.0,(float)i/(num_verts_per-1)-0.5,0.0});
 
+  perfil.push_back({1.0,0.5,0.0});
+  
   perfil.push_back({0.0,0.5,0.0});
   
   inicializar(perfil, nperfiles);
@@ -349,7 +353,7 @@ Eje::Eje(){
   agregar(MAT_Rotacion(90.0,0.0,0.0,1.0));
   agregar(MAT_Escalado(0.2,6.0,0.2));
 
-  Material* mat_eje = new Material(0.8,0.8,0.8,0.8);
+  Material* mat_eje = new Material(0.4,0.8,0.4,5.0);
   
   agregar(mat_eje);
   int i = agregar(new CilindroCerrado(10,20));
@@ -364,7 +368,7 @@ Soporte::Soporte(){
   agregar(MAT_Escalado(2.0,1.0,2.0));
 
   Textura* text_madera = new Textura("../recursos/imgs/text-madera.jpg");
-  Material* mat_soporte = new Material(text_madera,0.6,0.6,0.6,0.6);
+  Material* mat_soporte = new Material(text_madera,0.4,0.8,0.3,5.0);
   
   agregar(mat_soporte);
   int i = agregar(new CilindroCerrado(5,50));
