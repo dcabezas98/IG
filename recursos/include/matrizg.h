@@ -73,7 +73,7 @@ class MatrizCG
    // multiplicar esta matriz por una tupla por la derecha
    inline TuplaG<T,n> operator * ( const TuplaG<T,n>  & t ) const ;
 
-   // multiplicar esta matriz por una tupla por la derecha (con una dimesnión menos)
+   // multiplicar esta matriz por una tupla por la derecha (con una dimensión menos)
    // (se añade un 1, se multiplica, y luego se le quita la ultima componente)
    inline TuplaG<T,n-1> operator * ( const TuplaG<T,n-1>  & t ) const ;
 } ;

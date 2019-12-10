@@ -316,7 +316,12 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
          // actualizar las coordenadas cartesianas a partir de las polares
          // .....
 
-         actualizarEjesMCV();
+	org_polares[0]-=da*0.02;
+	org_polares[1]+=db*0.02;
+
+	org_cartesianas = Cartesianas(org_polares);
+
+	actualizarEjesMCV();
          break ;
       }
       case ModoCam::prim_pers_rot :
@@ -332,7 +337,25 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
          // 6. Actualizar las coordenadas polares.
          // .....
 
-         break ;
+	Matriz4f rotX=MAT_Rotacion(db, 1,0,0);
+	Matriz4f rotY=MAT_Rotacion(-da, 0,1,0);
+
+	Matriz4f rot(rotY*rotX);
+
+	for(int i = 0; i < 3; i++)
+	  eje[i]=rot*eje[i];
+
+	Tupla3f antiguas = org_cartesianas;
+	org_cartesianas = rot*org_cartesianas;
+	
+	Tupla3f desplazamiento = org_cartesianas-antiguas;
+
+	punto_atencion = punto_atencion + desplazamiento;
+
+	org_polares=Esfericas(org_cartesianas);
+
+	actualizarEjesMCV();
+	break ;
       }
       case ModoCam::prim_pers_despl :
       {

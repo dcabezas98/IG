@@ -14,7 +14,9 @@ LataPeones::LataPeones(){
   
   ponerNombre("Lata Peones");
 
-  agregar(new Lata());
+  agregar(new Lata("Lata de Coca-Cola","../recursos/imgs/lata-coke.jpg"));
+
+  entradas.back().objeto->ponerIdentificador(16711680); // Rojo en RGB
   
   agregar(MAT_Traslacion(0,1.4,4));
 
@@ -28,14 +30,12 @@ LataPeones::LataPeones(){
 
   MallaRevol* peon1 = new MallaRevolPLY("../recursos/plys/peon.ply",30);
 
+  peon1->ponerNombre("Peón de madera");
+  peon1->ponerIdentificador(10046464); // Marrón en RGB
+  
   nodo_peon1->agregar(mat_peon1);
   nodo_peon1->agregar(peon1);
   
-
-  agregar(nodo_peon1);
-
-  
-  agregar(MAT_Traslacion(3,0,0));
   
   // Peon 2
 
@@ -44,16 +44,13 @@ LataPeones::LataPeones(){
   Material* mat_peon2 = new Material(0.2,0.9,0.1,1.0);
 
   MallaRevol* peon2 = new MallaRevolPLY("../recursos/plys/peon.ply",30);
-  peon2->ponerColor({0.75,0.75,0.75});
 
+  peon2->ponerNombre("Peón blanco");
+  peon2->ponerIdentificador(16777215); // Blanco en RGB
+  peon2->ponerColor({0.75,0.75,0.75});
   
   nodo_peon2->agregar(mat_peon2);
   nodo_peon2->agregar(peon2);
-  
-  agregar(nodo_peon2);
-
-
-  agregar(MAT_Traslacion(3,0,0));
 
   
   // Peon 3
@@ -63,18 +60,26 @@ LataPeones::LataPeones(){
   Material* mat_peon3 = new Material(0.4,0.2,0.8,5.0);
 
   MallaRevol* peon3 = new MallaRevolPLY("../recursos/plys/peon.ply",30);
+
+  peon3->ponerNombre("Peón negro");
+  peon3->ponerIdentificador(2105376); // Gris oscuro en RGB
   peon3->ponerColor({0.05,0.05,0.05});
   
   nodo_peon3->agregar(mat_peon3);
   nodo_peon3->agregar(peon3);
 
+
+  agregar(nodo_peon1);  
+  agregar(MAT_Traslacion(3,0,0));
+  agregar(nodo_peon2);
+  agregar(MAT_Traslacion(3,0,0));
   agregar(nodo_peon3);
 }
 
 
-Lata::Lata(){
+Lata::Lata(const string nombre, const std::string & texturaJPG){
 
-  ponerNombre("Lata Coca-Cola");
+  ponerNombre(nombre);
 
   agregar(MAT_Escalado(5,5,5));
 
@@ -82,7 +87,7 @@ Lata::Lata(){
   
   NodoGrafoEscena* nodo_psup = new NodoGrafoEscena();
 
-  Material* mat_psup = new Material(0.4,0.4,0.9,20.0);
+  Material* mat_psup = new Material(0.5,0.5,0.9,20.0);
 
   MallaRevol* psup = new MallaRevolPLY("../recursos/plys/lata-psup.ply",30);
 
@@ -96,7 +101,7 @@ Lata::Lata(){
   
   NodoGrafoEscena* nodo_pinf = new NodoGrafoEscena();
 
-  Material* mat_pinf = new Material(0.4,0.4,0.9,20.0);
+  Material* mat_pinf = new Material(0.5,0.5,0.9,20.0);
 
   MallaRevol* pinf = new MallaRevolPLY("../recursos/plys/lata-pinf.ply",30);
 
@@ -110,7 +115,7 @@ Lata::Lata(){
 
   NodoGrafoEscena* nodo_pcue = new NodoGrafoEscena();
 
-  Textura* text_pcue = new Textura("../recursos/imgs/lata-coke.jpg");
+  Textura* text_pcue = new Textura(texturaJPG);
     
   Material* mat_pcue = new Material(text_pcue,0.5,0.4,1.0,40.0);
 
@@ -123,4 +128,24 @@ Lata::Lata(){
   agregar(nodo_psup);
   agregar(nodo_pinf);
   agregar(nodo_pcue);
+}
+
+
+VariasLatasPeones::VariasLatasPeones(){
+
+  ponerNombre("Varias Latas Peones");
+
+  agregar(new LataPeones());
+
+  agregar(MAT_Traslacion(4.5,0,0));
+
+  agregar(new Lata("Lata de Pepsi", "../recursos/imgs/lata-pepsi.jpg"));
+
+  entradas.back().objeto->ponerIdentificador(255); // Azul en RGB
+
+  agregar(MAT_Traslacion(4.5,0,0));
+
+  agregar(new Lata("Lata de la UGR", "../recursos/imgs/window-icon.jpg"));
+
+  entradas.back().objeto->ponerIdentificador(8421504); // Gris en RGB
 }
