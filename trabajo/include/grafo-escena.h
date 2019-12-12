@@ -44,17 +44,17 @@ enum class TipoEntNGE { objeto, transformacion, material, noInicializado } ;
 
 struct EntradaNGE
 {
-   TipoEntNGE tipo ;   // objeto, transformacion, material
-   union
-   {  Objeto3D * objeto ;  // ptr. a un objeto (no propietario)
-      Matriz4f * matriz ;  // ptr. a matriz 4x4 transf. (propietario)
-      Material * material ; // ptr. a material (no propietario)
-   } ;
-   // constructores (uno por tipo)
-   EntradaNGE( Objeto3D * pObjeto ) ;      // (copia solo puntero)
-   EntradaNGE( const Matriz4f & pMatriz ); // (crea copia en el heap)
-   EntradaNGE( Material * pMaterial ) ;    // (copia solo puntero)
-   ~EntradaNGE() ;
+  TipoEntNGE tipo ;   // objeto, transformacion, material
+  union
+  {  Objeto3D * objeto ;  // ptr. a un objeto (no propietario)
+    Matriz4f * matriz ;  // ptr. a matriz 4x4 transf. (propietario)
+    Material * material ; // ptr. a material (no propietario)
+  } ;
+  // constructores (uno por tipo)
+  EntradaNGE( Objeto3D * pObjeto ) ;      // (copia solo puntero)
+  EntradaNGE( const Matriz4f & pMatriz ); // (crea copia en el heap)
+  EntradaNGE( Material * pMaterial ) ;    // (copia solo puntero)
+  ~EntradaNGE() ;
 } ;
 
 // *********************************************************************
@@ -62,38 +62,40 @@ struct EntradaNGE
 
 class NodoGrafoEscena : public Objeto3D
 {
-   protected:
-   // COMPLETAR: práctica 3: definir variables y métodos privados del nodo
-   // .......
+protected:
+  // COMPLETAR: práctica 3: definir variables y métodos privados del nodo
+  // .......
 
   std::vector<EntradaNGE> entradas;
+
+  bool centro_calculado=false;
   
-   public:
+public:
 
-   NodoGrafoEscena() ;
+  NodoGrafoEscena() ;
 
-   // visualiza usando OpenGL
-   virtual void visualizarGL( ContextoVis & cv ) ;
+  // visualiza usando OpenGL
+  virtual void visualizarGL( ContextoVis & cv ) ;
 
-   // añadir una entrada al final, hace copia de la entrada
-   // devuelve indice de la entrada dentro del vector de entradas
-   unsigned agregar( const EntradaNGE & entrada );
+  // añadir una entrada al final, hace copia de la entrada
+  // devuelve indice de la entrada dentro del vector de entradas
+  unsigned agregar( const EntradaNGE & entrada );
 
-   // construir una entrada y añadirla (al final)
-   unsigned agregar( Objeto3D * pObjeto ); // objeto (copia solo puntero)
-   unsigned agregar( const Matriz4f & pMatriz ); // matriz (copia objeto)
-   unsigned agregar( Material * pMaterial ); // material (copia solo puntero)
+  // construir una entrada y añadirla (al final)
+  unsigned agregar( Objeto3D * pObjeto ); // objeto (copia solo puntero)
+  unsigned agregar( const Matriz4f & pMatriz ); // matriz (copia objeto)
+  unsigned agregar( Material * pMaterial ); // material (copia solo puntero)
 
-   // devuelve el puntero a la matriz en la i-ésima entrada
-   Matriz4f * leerPtrMatriz( unsigned iEnt );
+  // devuelve el puntero a la matriz en la i-ésima entrada
+  Matriz4f * leerPtrMatriz( unsigned iEnt );
 
-   // método para buscar un objeto con un identificador
-   virtual bool buscarObjeto( const int ident_busc, const Matriz4f & mmodelado,
-                    Objeto3D ** objeto, Tupla3f & centro_wc )  ;
+  // método para buscar un objeto con un identificador
+  virtual bool buscarObjeto( const int ident_busc, const Matriz4f & mmodelado,
+			     Objeto3D ** objeto, Tupla3f & centro_wc );
 
-   // si 'centro_calculado' es 'false', recalcula el centro usando los centros
-   // de los hijos (el punto medio de la caja englobante de los centros de hijos)
-   virtual void calcularCentroOC() ;
+  // si 'centro_calculado' es 'false', recalcula el centro usando los centros
+  // de los hijos (los promedia)
+  virtual void calcularCentroOC() ;
 
 } ;
 

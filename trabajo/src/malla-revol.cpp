@@ -37,13 +37,15 @@ void MallaRevol::inicializar
   
   for(int j = 0; j < m-1; j++){
     aux = perfil[j+1]-perfil[j];
-    nor_arist.push_back({aux[Y],-aux[X],0});
-  }
-  
-  vector<Tupla3f> nor_ver_perfil;
+    aux={aux[Y],-aux[X],0.0};
 
-  if(nor_arist.front()[X]!=0 or nor_arist.front()[Y]!=0 or nor_arist.front()[Z]!=0)
-    nor_arist.front() = nor_arist.front().normalized();
+    if(aux[X]!=0 or aux[Y]!=0 or aux[Z]!=0)
+      aux = aux.normalized();
+      
+    nor_arist.push_back(aux);
+  }
+
+  vector<Tupla3f> nor_ver_perfil;
   
   nor_ver_perfil.push_back(nor_arist.front());
   
@@ -56,9 +58,6 @@ void MallaRevol::inicializar
     
     nor_ver_perfil.push_back(aux);
   }
-
-  if(nor_arist.back()[X]!=0 or nor_arist.back()[Y]!=0 or nor_arist.back()[Z]!=0)
-    nor_arist.back() = nor_arist.back().normalized();
   
   nor_ver_perfil.push_back(nor_arist.back());
 

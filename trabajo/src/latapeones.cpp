@@ -46,7 +46,8 @@ LataPeones::LataPeones(){
   MallaRevol* peon2 = new MallaRevolPLY("../recursos/plys/peon.ply",30);
 
   peon2->ponerNombre("Peón blanco");
-  peon2->ponerIdentificador(16777215); // Blanco en RGB
+  //peon2->ponerIdentificador(16777215); // Blanco en RGB
+  peon2->ponerIdentificador(65535); // Cyan en RGB
   peon2->ponerColor({0.75,0.75,0.75});
   
   nodo_peon2->agregar(mat_peon2);
@@ -62,7 +63,8 @@ LataPeones::LataPeones(){
   MallaRevol* peon3 = new MallaRevolPLY("../recursos/plys/peon.ply",30);
 
   peon3->ponerNombre("Peón negro");
-  peon3->ponerIdentificador(2105376); // Gris oscuro en RGB
+  //peon3->ponerIdentificador(2105376); // Gris oscuro en RGB
+  peon3->ponerIdentificador(13369446); // Rosa en RGB
   peon3->ponerColor({0.05,0.05,0.05});
   
   nodo_peon3->agregar(mat_peon3);

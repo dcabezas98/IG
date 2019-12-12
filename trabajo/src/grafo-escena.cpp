@@ -33,18 +33,18 @@ using namespace std ;
 
 EntradaNGE::EntradaNGE( Objeto3D * pObjeto )
 {
-   assert( pObjeto != NULL );
-   tipo   = TipoEntNGE::objeto ;
-   objeto = pObjeto ;
+  assert( pObjeto != NULL );
+  tipo   = TipoEntNGE::objeto ;
+  objeto = pObjeto ;
 }
 // ---------------------------------------------------------------------
 // Constructor para entrada de tipo "matriz de transformación"
 
 EntradaNGE::EntradaNGE( const Matriz4f & pMatriz )
 {
-   tipo    = TipoEntNGE::transformacion ;
-   matriz  = new Matriz4f() ; // matriz en el heap, puntero propietario
-   *matriz = pMatriz ;
+  tipo    = TipoEntNGE::transformacion ;
+  matriz  = new Matriz4f() ; // matriz en el heap, puntero propietario
+  *matriz = pMatriz ;
 }
 
 // ---------------------------------------------------------------------
@@ -52,9 +52,9 @@ EntradaNGE::EntradaNGE( const Matriz4f & pMatriz )
 
 EntradaNGE::EntradaNGE( Material * pMaterial )
 {
-   assert( pMaterial != NULL );
-   tipo     = TipoEntNGE::material ;
-   material = pMaterial ;
+  assert( pMaterial != NULL );
+  tipo     = TipoEntNGE::material ;
+  material = pMaterial ;
 }
 
 // -----------------------------------------------------------------------------
@@ -62,14 +62,14 @@ EntradaNGE::EntradaNGE( Material * pMaterial )
 
 EntradaNGE::~EntradaNGE()
 {
-   /**  no fnciona debido a que se hacen copias (duplicados) de punteros
-   if ( tipo == TipoEntNGE::transformacion )
-   {
-      assert( matriz != NULL );
-      delete matriz ;
-      matriz = NULL ;
-   }
-   * **/
+  /**  no fnciona debido a que se hacen copias (duplicados) de punteros
+       if ( tipo == TipoEntNGE::transformacion )
+       {
+       assert( matriz != NULL );
+       delete matriz ;
+       matriz = NULL ;
+       }
+       * **/
 }
 
 // *****************************************************************************
@@ -81,11 +81,34 @@ EntradaNGE::~EntradaNGE()
 
 void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
 {
-   // COMPLETAR: práctica 3: recorrer las entradas y visualizar cada nodo.
-   // ........
+  // COMPLETAR: práctica 3: recorrer las entradas y visualizar cada nodo.
+  // ........
 
   const Tupla4f color_previo = leerFijarColVertsCauce( cv );
   Material* material_previo;
+
+
+  if(cv.modo_seleccion){
+    /*
+      cv.iluminacion = false;
+      cv.modo_visu=ModosVisu::relleno;
+      cv.visualizando_normales = false;
+      cv.dibujar_ejes=false;
+    */ // Se configura en seleccion.cpp
+
+    int id = leerIdentificador();
+
+    if(id != -1){
+      float r,g,b;
+
+      r = (float)((id & 0xFF0000) >> 16)/255.0;
+      g = (float)((id & 0xFF00) >> 8)/255.0;
+      b = (float)(id & 0xFF)/255.0;
+     
+      ponerColor({r,g,b});
+    }
+  }
+  
   
   if(cv.iluminacion)
     material_previo = cv.material_act;
@@ -98,7 +121,7 @@ void NodoGrafoEscena::visualizarGL( ContextoVis & cv )
       entradas[i].objeto->visualizarGL(cv);
       break;
     case TipoEntNGE::transformacion:
-      cv.cauce_act->compMM(*(entradas[i].matriz));
+      cv.cauce_act->compMM(*entradas[i].matriz);
       break;
     case TipoEntNGE::material:
       if(cv.iluminacion){
@@ -139,8 +162,8 @@ NodoGrafoEscena::NodoGrafoEscena()
 
 unsigned NodoGrafoEscena::agregar( const EntradaNGE & entrada )
 {
-   // COMPLETAR: práctica 3: agregar la entrada al nodo, devolver índice de la entrada agregada
-   // ........
+  // COMPLETAR: práctica 3: agregar la entrada al nodo, devolver índice de la entrada agregada
+  // ........
 
   entradas.push_back(entrada);
 
@@ -153,7 +176,7 @@ unsigned NodoGrafoEscena::agregar( const EntradaNGE & entrada )
 
 unsigned NodoGrafoEscena::agregar( Objeto3D * pObjeto )
 {
-   return agregar( EntradaNGE( pObjeto ) );
+  return agregar( EntradaNGE( pObjeto ) );
 }
 // ---------------------------------------------------------------------
 // construir una entrada y añadirla (al final)
@@ -161,20 +184,20 @@ unsigned NodoGrafoEscena::agregar( Objeto3D * pObjeto )
 
 unsigned NodoGrafoEscena::agregar( const Matriz4f & pMatriz )
 {
-   return agregar( EntradaNGE( pMatriz ) );
+  return agregar( EntradaNGE( pMatriz ) );
 }
 // ---------------------------------------------------------------------
 // material (copia solo puntero)
 unsigned NodoGrafoEscena::agregar( Material * pMaterial )
 {
-   return agregar( EntradaNGE( pMaterial ) );
+  return agregar( EntradaNGE( pMaterial ) );
 }
 
 // devuelve el puntero a la matriz en la i-ésima entrada
 Matriz4f * NodoGrafoEscena::leerPtrMatriz( unsigned indice )
 {
-   // COMPLETAR: práctica 3: devolver puntero la matriz en ese índice
-   //   (debe de dar error y abortar si no hay una matriz en esa entrada)
+  // COMPLETAR: práctica 3: devolver puntero la matriz en ese índice
+  //   (debe de dar error y abortar si no hay una matriz en esa entrada)
 
   assert(indice<entradas.size());
   assert(entradas[indice].tipo==TipoEntNGE::transformacion);
@@ -189,43 +212,101 @@ Matriz4f * NodoGrafoEscena::leerPtrMatriz( unsigned indice )
 void NodoGrafoEscena::calcularCentroOC()
 {
 
-   // COMPLETAR: práctica 5: calcular y guardar el centro del nodo
-   //    en coordenadas de objeto (hay que hacerlo recursivamente)
-   //   (si el centro ya ha sido calculado, no volver a hacerlo)
-   // ........
+  // COMPLETAR: práctica 5: calcular y guardar el centro del nodo
+  //    en coordenadas de objeto (hay que hacerlo recursivamente)
+  //   (si el centro ya ha sido calculado, no volver a hacerlo)
+  // ........
 
+  if(centro_calculado)
+    return;
+
+  std::vector<Tupla3f> centros_hijos;
+
+  Matriz4f matriz_modelado = MAT_Ident();
+
+  for(unsigned i = 0; i < entradas.size(); i++)
+    switch(entradas[i].tipo){
+    case TipoEntNGE::objeto:
+      entradas[i].objeto->calcularCentroOC();
+      centros_hijos.push_back(matriz_modelado*entradas[i].objeto->leerCentroOC());     
+      break;
+      
+    case TipoEntNGE::transformacion:
+      matriz_modelado = matriz_modelado*(*entradas[i].matriz);
+      break;
+    }
+
+  Tupla3f centro={0.0,0.0,0.0};
+
+  for(int i = 0; i < centros_hijos.size(); i++)
+    centro = centro+centros_hijos[i];
+
+  centro = centro/(float)centros_hijos.size();
+  
+  ponerCentroOC(centro);
+
+  centro_calculado = true;
 }
 // -----------------------------------------------------------------------------
 // método para buscar un objeto con un identificador y devolver un puntero al mismo
 
 bool NodoGrafoEscena::buscarObjeto
 (
-   const int         ident_busc, // identificador a buscar
-   const Matriz4f &  mmodelado,  // matriz de modelado
-   Objeto3D       ** objeto,     // (salida) puntero al puntero al objeto
-   Tupla3f &         centro_wc   // (salida) centro del objeto en coordenadas del mundo
-)
-{
-   assert( 0 < ident_busc );
+ const int         ident_busc, // identificador a buscar
+ const Matriz4f &  mmodelado,  // matriz de modelado
+ Objeto3D       ** objeto,     // (salida) puntero al puntero al objeto
+ Tupla3f &         centro_wc   // (salida) centro del objeto en coordenadas del mundo
+ )
+{ 
+  assert( 0 < ident_busc );
 
-   // COMPLETAR: práctica 5: buscar un sub-objeto con un identificador
-   // Se deben de dar estos pasos:
+  // COMPLETAR: práctica 5: buscar un sub-objeto con un identificador
+  // Se deben de dar estos pasos:
 
-   // 1. calcula el centro del objeto, (solo la primera vez)
-   // ........
+  // 1. calcula el centro del objeto, (solo la primera vez)
+  // ........
 
+  calcularCentroOC();
+   
 
-   // 2. si el identificador del nodo es el que se busca, ya está (terminar)
-   // ........
+  // 2. si el identificador del nodo es el que se busca, ya está (terminar)
+  // ........
+   
+  if(leerIdentificador()==ident_busc){
 
+    centro_wc = mmodelado*leerCentroOC();
 
-   // 3. El nodo no es el buscado: buscar recursivamente en los hijos
-   //    (si alguna llamada para un sub-árbol lo encuentra, terminar y devolver 'true')
-   // ........
+    *objeto = this;
+     
+    return true;
+  }
 
+  // 3. El nodo no es el buscado: buscar recursivamente en los hijos
+  //    (si alguna llamada para un sub-árbol lo encuentra, terminar y devolver 'true')
+  // ........
 
-   // ni este nodo ni ningún hijo es el buscado: terminar
-   return false ;
+  bool encontrado = false;
+   
+  Matriz4f matriz_modelado = mmodelado;
+   
+  for(unsigned i = 0; i < entradas.size() and !encontrado; i++)
+    switch(entradas[i].tipo){
+    case TipoEntNGE::objeto:
+      if(entradas[i].objeto->buscarObjeto(ident_busc, matriz_modelado, objeto, centro_wc)){
+	encontrado = true;
+      }      
+      break;
+      
+    case TipoEntNGE::transformacion:
+      matriz_modelado = matriz_modelado*(*entradas[i].matriz);
+      break;
+    }
+
+  return encontrado;
+
+   
+  // ni este nodo ni ningún hijo es el buscado: terminar
+  return false ;
 }
 
 

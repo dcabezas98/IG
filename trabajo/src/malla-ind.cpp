@@ -349,10 +349,32 @@ void MallaInd::visualizarGL( ContextoVis & cv )
      return;
    }
    
-
+   
    // guardar el color previamente fijado
    const Tupla4f color_previo = leerFijarColVertsCauce( cv );
+   
 
+   if(cv.modo_seleccion){
+     /*
+     cv.iluminacion = false;
+     cv.modo_visu=ModosVisu::relleno;
+     cv.dibujar_ejes=false;
+     */ // Se configura en seleccion.cpp
+
+     int id = leerIdentificador();
+
+     if(id != -1){
+       float r,g,b;
+
+       r = (float)((id & 0xFF0000) >> 16)/255.0;
+       g = (float)((id & 0xFF00) >> 8)/255.0;
+       b = (float)(id & 0xFF)/255.0;
+     
+       ponerColor({r,g,b});
+     }
+   }
+   
+   
    // COMPLETAR: práctica 1: visualizar según el modo (en 'cv.modo_envio')
    //   ** inmediato begin/end                   : usar 'visualizarGL_MI_BE'
    //   ** inmediato con un VAO (glDrawElements) : usar 'visualizarGL_MI_VAO'
