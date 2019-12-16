@@ -257,7 +257,7 @@ bool NodoGrafoEscena::buscarObjeto
  Objeto3D       ** objeto,     // (salida) puntero al puntero al objeto
  Tupla3f &         centro_wc   // (salida) centro del objeto en coordenadas del mundo
  )
-{ 
+{
   assert( 0 < ident_busc );
 
   // COMPLETAR: práctica 5: buscar un sub-objeto con un identificador
@@ -265,10 +265,9 @@ bool NodoGrafoEscena::buscarObjeto
 
   // 1. calcula el centro del objeto, (solo la primera vez)
   // ........
-
+  
   calcularCentroOC();
    
-
   // 2. si el identificador del nodo es el que se busca, ya está (terminar)
   // ........
    
@@ -277,7 +276,7 @@ bool NodoGrafoEscena::buscarObjeto
     centro_wc = mmodelado*leerCentroOC();
 
     *objeto = this;
-     
+
     return true;
   }
 
@@ -303,10 +302,6 @@ bool NodoGrafoEscena::buscarObjeto
     }
 
   return encontrado;
-
-   
-  // ni este nodo ni ningún hijo es el buscado: terminar
-  return false ;
 }
 
 

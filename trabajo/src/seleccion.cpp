@@ -139,7 +139,7 @@ bool Seleccion( int x, int y, Escena * escena, ContextoVis & cv_dib )
    // .....
 
    Matriz4f mmodelado = MAT_Ident();
-   Objeto3D **objeto = nullptr;
+   Objeto3D **objeto = new Objeto3D*;
    Tupla3f centro_wc;
 
    bool encontrado = escena->objetoActual()->buscarObjeto(id_pix, mmodelado, objeto, centro_wc);

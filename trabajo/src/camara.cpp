@@ -319,6 +319,10 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
 	org_polares[0]-=da*0.02;
 	org_polares[1]+=db*0.02;
 
+	if(org_polares[1]<-(M_PI*0.5-0.01)) org_polares[1]=-(M_PI*0.5-0.01);
+	
+	else if(org_polares[1]>(M_PI*0.5-0.01)) org_polares[1]=(M_PI*0.5-0.01);
+	
 	org_cartesianas = Cartesianas(org_polares);
 
 	actualizarEjesMCV();
@@ -326,33 +330,27 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
       }
     case ModoCam::prim_pers_rot :
       {
+	
 	// COMPLETAR: práctica 5
-	// 1. Crear una matriz de rotacion compuesta de:
-	//    1.rotacion respecto al eje X del marco de cámara, según ángulo 'db'
-	//    2.rotacion respecto al eje Y del marco del mundo, según '-da'
-	// 2. Aplicar esa matriz a los tres ejes del marco de coordenadas de cámara
-	// 3. Calcular las nuevas coordenadas cartesianas aplicando esa rotacion a las antiguas
-	// 4. Actualizar el punto de atención (desplazarlo segun el vector desde las antiguas coord. cartesianas a las nuevas)
-	// 5. Actualizar las coordenadas cartesianas a las nuevas
-	// 6. Actualizar las coordenadas polares.
-	// .....
+	// 1. actualizar las dos primeras componentes (ángulos) de las coordenadas polares (igual que en el modo examinar)
+	// 2. calcular las nuevas coordenadas cartesianas, y el vector de desplazamiento desde las nuevas a las antiguas
+	// 3. sumarle al punto de atención ese vector de desplazamiento
+	// 4. actualizar las coordenadas cartesianas
+	// 5. actualizar los ejes del M.C.V. (llamar a 'actualizarEjesMCV')
 
-	Matriz4f rotX=MAT_Rotacion(db, 1,0,0);
-	Matriz4f rotY=MAT_Rotacion(-da, 0,1,0);
+	org_polares[0]+=da*0.02;
+	org_polares[1]-=db*0.02;
 
-	Matriz4f rot(rotY*rotX);
-
-	for(int i = 0; i < 3; i++)
-	  eje[i]=rot*eje[i];
+	if(org_polares[1]<-(M_PI*0.5-0.1)) org_polares[1]=-(M_PI*0.5-0.1);
+	
+	else if(org_polares[1]>(M_PI*0.5-0.1)) org_polares[1]=(M_PI*0.5-0.1);
 
 	Tupla3f antiguas = org_cartesianas;
-	org_cartesianas = rot*org_cartesianas;
+	org_cartesianas = Cartesianas(org_polares);
 	
-	Tupla3f desplazamiento = org_cartesianas-antiguas;
+	Tupla3f desplazamiento = antiguas-org_cartesianas;
 
 	punto_atencion = punto_atencion + desplazamiento;
-
-	org_polares=Esfericas(org_cartesianas);
 
 	actualizarEjesMCV();
 	break ;
@@ -365,13 +363,11 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
 	// .....
 	// (nota: los ejes no cambian)
 
-	Tupla3f n = org_cartesianas-punto_atencion;
-	
-	punto_atencion = punto_atencion + Tupla3f({da, db, 0.0});
-
-	org_cartesianas = punto_atencion+n;
-
+	Tupla3f despl = -da*eje[X]*0.5+db*eje[Y]*0.5;
+	punto_atencion = punto_atencion+despl;
+	org_cartesianas = org_cartesianas+despl;
 	org_polares = Esfericas(org_cartesianas);
+	
 	break ;
       }
     }
@@ -394,7 +390,9 @@ void Camara3Modos::moverZ( const float dz )
 	// nota: los ejes no cambian, ni el punto de atención
 	// .....
 
-	org_polares[Z] = 1+(org_polares[Z]-1)*pow(1+0.1,dz);
+	float r_min = 0.5, epsilon = 0.1;
+	
+	org_polares[Z] = r_min+(org_polares[Z]-r_min)*pow(1+0.1,dz);
 	
 	org_cartesianas = Cartesianas(org_polares);
 	
@@ -408,10 +406,10 @@ void Camara3Modos::moverZ( const float dz )
 	// nota: los ejes no cambian
 	// .....
 
-	punto_atencion[Z]+=dz;
-
-	org_cartesianas[Z]+=dz;
-	org_polares=Esfericas(org_cartesianas);
+	Tupla3f despl = dz*eje[Z];
+	punto_atencion = punto_atencion+despl;
+	org_cartesianas = org_cartesianas+despl;
+	org_polares = Esfericas(org_cartesianas);
 	
 	break ;
       }
