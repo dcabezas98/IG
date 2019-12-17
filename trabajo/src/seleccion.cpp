@@ -88,6 +88,7 @@ bool Seleccion( int x, int y, Escena * escena, ContextoVis & cv_dib )
    cv.modo_seleccion = true;
    cv.iluminacion = false;
    cv.visualizando_normales = false;
+   cv.dibujar_ejes=false;
    cv.modo_visu=ModosVisu::relleno;
 
    FijarColVertsIdent( *cv.cauce_act, 0 );
@@ -103,6 +104,9 @@ bool Seleccion( int x, int y, Escena * escena, ContextoVis & cv_dib )
    cv.cauce_act->fijarEvalMIL(false);
 
    glViewport(0,0,cv.ventana_tam_x, cv.ventana_tam_y);
+
+   glClearColor(0.0,0.0,0.0,1.0);
+   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
    // 4. Activar la cámara (se debe leer de la escena con 'camaraActual')
    // ....

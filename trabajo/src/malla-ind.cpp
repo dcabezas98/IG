@@ -342,36 +342,13 @@ void MallaInd::visualizarGL( ContextoVis & cv )
    {  cout << "advertencia: intentando dibujar malla vacía '" << leerNombre() << "'" << endl << flush ;
       return ;
    }
-
-
-   if(cv.visualizando_normales){
-     visualizarNormales();
-     return;
-   }
-   
    
    // guardar el color previamente fijado
    const Tupla4f color_previo = leerFijarColVertsCauce( cv );
    
-
-   if(cv.modo_seleccion){
-     /*
-     cv.iluminacion = false;
-     cv.modo_visu=ModosVisu::relleno;
-     cv.dibujar_ejes=false;
-     */ // Se configura en seleccion.cpp
-
-     int id = leerIdentificador();
-
-     if(id != -1){
-       float r,g,b;
-
-       r = (float)((id & 0xFF0000) >> 16)/255.0;
-       g = (float)((id & 0xFF00) >> 8)/255.0;
-       b = (float)(id & 0xFF)/255.0;
-     
-       ponerColor({r,g,b});
-     }
+   if(cv.visualizando_normales){
+     visualizarNormales();
+     return;
    }
    
    

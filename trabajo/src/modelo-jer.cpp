@@ -32,6 +32,9 @@ C::C(){
   
   agregar(new Soporte());
 
+  entradas.back().objeto->ponerNombre("Soporte");
+  entradas.back().objeto->ponerIdentificador(1);
+
   i = agregar(MAT_Rotacion(0.0,0.0,1.0,0.0));
   mat_rotacion = leerPtrMatriz(i);
   
@@ -39,11 +42,19 @@ C::C(){
   brazo1->agregar(MAT_Traslacion(2,0.0,0.0));
   
   // brazo 1
+
+  Eje* eje1 = new Eje();
   
-  brazo1->agregar(new Eje());
+  eje1->ponerNombre("Eje 1");
+  eje1->ponerIdentificador(10);
+    
+  brazo1->agregar(eje1);
   
   PelotaInflable* pelota1 = new PelotaInflable();
 
+  pelota1->ponerNombre("Pelota Inflable 1");
+  pelota1->ponerIdentificador(12);
+  
   // pelota 1
 
   i = pelota1->agregar(MAT_Traslacion(7.5,0.0,0.0));
@@ -63,6 +74,9 @@ C::C(){
   mat_traslacion_helice1 = brazo1->leerPtrMatriz(i);
   
   Helice* helice1 = new Helice();
+
+  helice1->ponerNombre("Helice 1");
+  helice1->ponerIdentificador(11);
 
   // helice 1
 
@@ -87,9 +101,17 @@ C::C(){
   
   // brazo 2
   
-  brazo2->agregar(new Eje());
+  Eje* eje2 = new Eje();
+  
+  eje2->ponerNombre("Eje 2");
+  eje2->ponerIdentificador(20);
+    
+  brazo2->agregar(eje2);
   
   PelotaInflable* pelota2 = new PelotaInflable();
+
+  pelota2->ponerNombre("Pelota Inflable 2");
+  pelota2->ponerIdentificador(22);
 
   // pelota 2
 
@@ -111,6 +133,9 @@ C::C(){
   mat_traslacion_helice2 = brazo2->leerPtrMatriz(i);
   
   Helice* helice2 = new Helice();
+
+  helice2->ponerNombre("Helice 2");
+  helice2->ponerIdentificador(21);
 
   // helice 2
 
@@ -135,9 +160,17 @@ C::C(){
   
   // brazo 3
 
-  brazo3->agregar(new Eje());
+  Eje* eje3 = new Eje();
+  
+  eje3->ponerNombre("Eje 3");
+  eje3->ponerIdentificador(30);
+    
+  brazo3->agregar(eje3);
   
   PelotaInflable* pelota3 = new PelotaInflable();
+
+  pelota3->ponerNombre("Pelota Inflable 3");
+  pelota3->ponerIdentificador(32);
 
   // pelota 3
 
@@ -158,6 +191,9 @@ C::C(){
   mat_traslacion_helice3 = brazo3->leerPtrMatriz(i);
   
   Helice* helice3 = new Helice();
+
+  helice3->ponerNombre("Helice 3");
+  helice3->ponerIdentificador(31);
 
   // helice 3
 
@@ -182,10 +218,18 @@ C::C(){
   
   // brazo 4
 
-  brazo4->agregar(new Eje());
+  Eje* eje4 = new Eje();
+  
+  eje4->ponerNombre("Eje 4");
+  eje4->ponerIdentificador(40);
+    
+  brazo4->agregar(eje4);
   
   PelotaInflable* pelota4 = new PelotaInflable();
 
+  pelota4->ponerNombre("Pelota Inflable 4");
+  pelota4->ponerIdentificador(42);
+  
   // pelota 4
 
   i = pelota4->agregar(MAT_Traslacion(7.5,0.0,0.0));
@@ -205,6 +249,9 @@ C::C(){
   mat_traslacion_helice4 = brazo4->leerPtrMatriz(i);
   
   Helice* helice4 = new Helice();
+
+  helice4->ponerNombre("Helice 4");
+  helice4->ponerIdentificador(41);
 
   // helice 4
 
@@ -325,8 +372,6 @@ void C::actualizarEstadoParametro(const unsigned iParam, const float t_sec){
 
 CilindroCerrado::CilindroCerrado(const int num_verts_per,
 				 const unsigned nperfiles){
-
-   ponerNombre("CilindroCerrado");
     
   std::vector<Tupla3f> perfil;
   
