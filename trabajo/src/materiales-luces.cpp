@@ -258,7 +258,7 @@ void ColFuentesLuz::activar( Cauce & cauce )
   for(int i = 0; i < vpf.size(); i++){
     colores.push_back(vpf[i]->color);
 
-    pd={cos(vpf[i]->longi*M_PI/180.0),sin(vpf[i]->lati*M_PI/180.0),sin(vpf[i]->longi*M_PI/180.0),0.0};
+    pd={cos(vpf[i]->longi*M_PI/180.0)*cos(vpf[i]->lati*M_PI/180),sin(vpf[i]->lati*M_PI/180.0),sin(vpf[i]->longi*M_PI/180.0)*cos(vpf[i]->lati*M_PI/180),0.0};
     pos_dir.push_back(pd.normalized());
   }
   
