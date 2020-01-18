@@ -365,9 +365,6 @@ void Camara3Modos::desplRotarXY( const float da, const float db )
 
 	Tupla3f despl = -da*eje[X]*0.5+db*eje[Y]*0.5;
 	punto_atencion = punto_atencion+despl;
-	org_cartesianas = org_cartesianas+despl;
-	org_polares = Esfericas(org_cartesianas);
-	
 	break ;
       }
     }
@@ -407,10 +404,7 @@ void Camara3Modos::moverZ( const float dz )
 	// .....
 
 	Tupla3f despl = dz*eje[Z];
-	punto_atencion = punto_atencion+despl;
-	org_cartesianas = org_cartesianas+despl;
-	org_polares = Esfericas(org_cartesianas);
-	
+	punto_atencion = punto_atencion+despl;	
 	break ;
       }
     }

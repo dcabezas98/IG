@@ -24,7 +24,7 @@ LataPeones::LataPeones(){
 
   NodoGrafoEscena* nodo_peon1 = new NodoGrafoEscena();
 
-  Textura* text_peon1 = new Textura("../recursos/imgs/text-madera.jpg");
+  Textura* text_peon1 = new TexturaXZ("../recursos/imgs/text-madera.jpg");
   
   Material* mat_peon1 = new Material(text_peon1,0.3,0.6,1.0,30.0);
 

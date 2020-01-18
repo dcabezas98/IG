@@ -41,6 +41,24 @@ Textura::Textura( const std::string & nombreArchivoJPG )
 
 // ---------------------------------------------------------------------
 
+TexturaXY::TexturaXY( const std::string & nombreArchivoJPG ) :Textura(nombreArchivoJPG)
+{
+   // COMPLETAR: práctica 4: cargar imagen de textura
+   // (las variables de instancia están inicializadas en la decl. de la clase)
+   // .....
+  
+  modo_gen_ct = mgct_coords_objeto;
+}
+
+TexturaXZ::TexturaXZ( const std::string & nombreArchivoJPG ) :Textura(nombreArchivoJPG)
+{
+   // COMPLETAR: práctica 4: cargar imagen de textura
+   // (las variables de instancia están inicializadas en la decl. de la clase)
+   // .....
+ 
+  modo_gen_ct = mgct_coords_ojo;
+}
+
 //----------------------------------------------------------------------
 
 void Textura::enviar()

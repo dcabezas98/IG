@@ -412,7 +412,7 @@ Soporte::Soporte(){
 
   agregar(MAT_Escalado(2.0,1.0,2.0));
 
-  Textura* text_madera = new Textura("../recursos/imgs/text-madera.jpg");
+  Textura* text_madera = new TexturaXY("../recursos/imgs/text-madera.jpg");
   Material* mat_soporte = new Material(text_madera,0.4,0.8,0.3,5.0);
   
   agregar(mat_soporte);
