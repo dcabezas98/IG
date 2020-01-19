@@ -421,7 +421,7 @@ void Camara3Modos::mirarHacia( const Tupla3f & nuevo_punto_aten )
   // Actualizar las coordenadas polares a partir de las cartesianas
   // Poner el modo actual en modo examinar
 
-  org_cartesianas=org_cartesianas+nuevo_punto_aten-punto_atencion;
+  org_cartesianas=org_cartesianas-nuevo_punto_aten+punto_atencion;
 
   org_polares = Esfericas(org_cartesianas);
 
