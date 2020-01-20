@@ -16,6 +16,7 @@
 // Prueba
 #include "malla-barrido.h"
 #include "gusano.h"
+#include "dado.h"
 
 
 
@@ -330,12 +331,14 @@ EscenaPrueba::EscenaPrueba()
   using namespace std ;
   cout << "Creando objetos de escena de prueba .... " << flush ;
 
-  objetos.push_back(new Diamante());
-  objetos.push_back(new Diabolo(20));
-  objetos.push_back(new Polea(30,50));
-  objetos.push_back(new Tunel(15,-1,2,12));
-  objetos.push_back(new MallaBarridoPLY("../recursos/plys/peon",20,-3,1));
-  objetos.push_back(new Gusano(15));
+  // objetos.push_back(new Diamante());
+  // objetos.push_back(new Diabolo(20));
+  // objetos.push_back(new Polea(30,50));
+  // objetos.push_back(new Tunel(15,-1,2,12));
+  // objetos.push_back(new MallaBarridoPLY("../recursos/plys/peon",20,-3,1));
+  objetos.push_back(new Gusano(7));
+  objetos.push_back(new NodoDado());
+  objetos.push_back(new NodoDado24());
    
   cout << "hecho." << endl << flush ;
 }
