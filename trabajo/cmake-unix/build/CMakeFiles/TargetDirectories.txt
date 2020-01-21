@@ -1,3 +1,0 @@
-/home/dcabezas/Documents/git/IG/trabajo/cmake-unix/build/CMakeFiles/rebuild_cache.dir
-/home/dcabezas/Documents/git/IG/trabajo/cmake-unix/build/CMakeFiles/pracs_ig_exe.dir
-/home/dcabezas/Documents/git/IG/trabajo/cmake-unix/build/CMakeFiles/edit_cache.dir
